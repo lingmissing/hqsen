@@ -1,0 +1,17 @@
+CREATE DATABASE IF NOT EXISTS hqsen default charset utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE `hqsen_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `user_name` varchar(32) NOT NULL COMMENT '唯一用户名',
+  `nickname` varchar(32) NOT NULL DEFAULT '' COMMENT '用昵称',
+  `user_pic` varchar(255) NOT NULL DEFAULT '' COMMENT '用户头像',
+  `password` varchar(40) NOT NULL COMMENT '密码',
+  `phone` varchar(18) NOT NULL DEFAULT '' COMMENT '手机号',
+  `email` varchar(70) NOT NULL DEFAULT '' COMMENT '邮箱',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '时间戳',
+  `user_type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '用户来源 1未知用户 2超级管理员 3',
+  `del_flag` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '1正常 2为删除',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_name` (`user_name`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
