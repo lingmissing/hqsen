@@ -15,4 +15,4 @@ CREATE TABLE `hqsen_user` (
   UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-http://yx.pmdaniu.com/2011/7861/973bc98fb329b193ce84c940e0e97a4f/start.html#g=1&p=客资_搭建信息_-_客资信息列表
+http://www.pmdaniu.com/rp/view?id=WHtRNQNvUmEAMFB0ADs
