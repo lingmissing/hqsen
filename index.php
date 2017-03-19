@@ -6,7 +6,6 @@
  * Time: 14:54
  * File Using:应用入口文件
  */
-
 // 定义API目录
 define('API_PATH', __DIR__ . '/api/');
 // 错误debug信息
