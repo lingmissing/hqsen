@@ -5,7 +5,9 @@ module.exports = {
   title: 'vue',
   vendor: [
     'vue',
-    'vue-router'
+    'vue-router',
+    'axios',
+    'es6-promise'
   ],
   postcss: [
     require('postcss-salad')({
