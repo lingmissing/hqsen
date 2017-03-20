@@ -43,7 +43,7 @@
       }
     },
     created () {
-      sessionStorage.setItem('token','11111') 
+      sessionStorage.setItem('token', '11111')
     },
     methods: {
       submitForm (formName) {
