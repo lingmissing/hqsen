@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import Login from './Login'
 import Home from './Home'
 import Test from './Test'
-import headContent from './headContent'
+import List from './List'
+import SideLayout from './SideLayout'
 
 Vue.use(Router)
 
@@ -16,14 +17,19 @@ export default new Router({
       component: Login
     },
     {
-      name: 'headContent',
+      name: 'SideLayout',
       path: '/',
-      component: headContent,
+      component: SideLayout,
       children: [
         {
           name: 'Home',
           path: '/home',
           component: Home
+        },
+        {
+          name: 'List',
+          path: '/list/:type',
+          component: List
         },
         {
           name: 'Test',

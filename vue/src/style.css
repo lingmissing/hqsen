@@ -1,1 +1,7 @@
 @reset-global pc;
+body {
+  font-size: 'Microsoft Yahei';
+}
+.content-wrapper {
+  padding: 10px;
+}
