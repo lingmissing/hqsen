@@ -13,9 +13,7 @@
     },
     created () {
       const token = sessionStorage.getItem('token')
-      if (token) {
-        // this.$router.push('/customer-list?type=custom')
-      } else {
+      if (!token) {
         this.$router.push('/login')
       }
     },

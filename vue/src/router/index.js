@@ -1,9 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './Login'
-import Home from './Home'
 import Test from './Test'
+// 列表
 import List from './List'
+// 详情
+import Detail from './Detail'
+// 新增
+import Add from './Add'
+// 编辑
 import SideLayout from './SideLayout'
 
 Vue.use(Router)
@@ -22,14 +27,19 @@ export default new Router({
       component: SideLayout,
       children: [
         {
-          name: 'Home',
-          path: '/home',
-          component: Home
-        },
-        {
           name: 'List',
           path: '/list/:type',
           component: List
+        },
+        {
+          name: 'Detail',
+          path: '/detail/:type',
+          component: Detail
+        },
+        {
+          name: 'Add',
+          path: '/add/:type',
+          component: Add
         },
         {
           name: 'Test',

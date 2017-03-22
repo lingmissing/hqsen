@@ -5,16 +5,17 @@
     <div class="control-box">
       <el-input
         class="search-input"
+        @keyup.enter="handSearch"
         v-if="type === 'hotelAccount'"
         placeholder="跟进账号或酒店筛选"
         icon="search"
-        v-model="input2"
-        :on-icon-click="handleIconClick">
+        v-model="searchInput"
+        :on-icon-click="handSearch">
       </el-input>
        <el-button
         class="add-btn"
-        v-if="type === 'hotelAccount' || type === 'innerAccount' || type === 'customArea' || type === 'hotel'"
-        @click.native.prevent="lookDetail(scope)"
+        v-if="type.indexOf(addBtnShowType) > -1"
+        @click="addRow"
         type="primary">
         新增
       </el-button>
@@ -27,64 +28,19 @@
       :rowData="rowData" 
       :columnData="columnData">
         <el-table-column
-          v-if="type == 'custom' || type === 'build'"
-          prop="hh"
+          prop="control"
           label="操作">
             <template scope="scope">
-              <el-button
-                @click.native.prevent="lookDetail(scope)"
-                type="text"
-                size="small">
-                查看详情
-              </el-button>
+              <!--查看详情-->
+              <el-button @click="lookRow(scope)" size="small">查看详情</el-button>
+              <!--禁用-->
+              <el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">禁用</el-button>
+              <!--编辑-->
+              <el-button @click="editRow(scope)" size="small">编辑</el-button>
+              <!--删除-->
+              <el-button @click="rmRow(scope)" size="small" :plain="true" type="danger">删除</el-button>
             </template>
         </el-table-column>
-        <!--酒店操作-->
-        <el-table-column
-          v-if="type === 'hotel' || type === 'customArea'"
-          prop="hh"
-          label="操作">
-            <template scope="scope">
-              <el-button
-                @click.native.prevent="lookDetail(scope)"
-                size="small">
-                编辑
-              </el-button>
-              <el-button
-                @click.native.prevent="lookDetail(scope)"
-                size="small" :plain="true" type="danger">
-                删除
-              </el-button>
-            </template>
-        </el-table-column>
-        <!--酒店账号-->
-
-        <el-table-column
-          v-if="type === 'hotelAccount' || type === 'innerAccount'"
-          prop="hh"
-          label="操作">
-            <template scope="scope">
-              <el-button
-                @click.native.prevent="lookDetail(scope)"
-                type="text"
-                size="small">
-                禁用
-              </el-button>
-              <el-button
-                @click.native.prevent="lookDetail(scope)"
-                type="text"
-                size="small">
-                编辑
-              </el-button>
-              <el-button
-                @click.native.prevent="lookDetail(scope)"
-                type="text"
-                size="small">
-                删除
-              </el-button>
-            </template>
-        </el-table-column>
-        
       </my-table>
   </div>
 </template>
@@ -125,8 +81,10 @@
     },
     data () {
       return {
-        type: '',
-        breadcrumb: [],
+        type: '',           // 列表类型
+        searchInput: '',    // 输入框
+        addBtnShowType: ['hotelAccount', 'innerAccount', 'customArea', 'hotel'],
+        breadcrumb: [],     // 导航条
         rowData: [{
           date: '2016-05-02',
           name: '王小虎',
@@ -146,19 +104,16 @@
           name: '王小虎',
           address: '上海市普陀区金沙江路 1516 弄'
         }],
-        columnData: [],
-        total: 55,
-        currentPage: 1
+        columnData: [], // 表头
+        total: 55,     // 总页数
+        currentPage: 1 // 当前页
       }
     },
     watch: {
-      // '$route' (to, from) {
-      //   debugger
-      //   console.log(to)
-      // }
       '$route': 'setBasicInfo'
     },
     methods: {
+      // 设置基础信息
       setBasicInfo () {
         const type = this.$route.params.type
         const { breadcrumb, columnData } = config[type]
@@ -168,6 +123,7 @@
         this.columnData = columnData
         this.handleCurrentChange(1)
       },
+      // 分页跳转
       handleCurrentChange (current) {
         console.log('currentpage', current)
         // Fetch('getData', { id, page: current }).then(response => {
@@ -176,9 +132,49 @@
         // this.total = total
         // })
       },
-      lookDetail (data) {
-        const rowData = data.row
-        console.log(rowData)
+      // 搜索
+      handSearch () {
+        const { searchInput } = this
+        if (searchInput) {
+
+        } else {
+          console.log('查询内容不能为空')
+        }
+      },
+      // --查看详情--
+      lookRow (data) {
+        // const rowData = data.row
+        this.$router.push({
+          path: '/detail',
+          name: 'Detail',
+          param: { type: this.type },
+          query: { id: 1 }
+        })
+      },
+      // --禁用--
+      disableRow (data) {
+
+      },
+      // --编辑--
+      editRow (data) {
+        this.$router.push({
+          path: '/add',
+          name: 'Add',
+          params: { type: this.type },
+          query: { id: 1 }
+        })
+      },
+      // --删除--
+      rmRow (data) {
+
+      },
+      // --添加--
+      addRow () {
+        this.$router.push({
+          path: '/add',
+          name: 'Add',
+          params: { type: this.type }
+        })
       }
     }
   }
