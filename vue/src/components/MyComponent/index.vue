@@ -52,10 +52,20 @@
       :placeholder="item.placeholder"
       :picker-options="pickerOptions">
     </el-date-picker>
+    <!--image-->
+    <div class="image-form" v-else-if="item.type === 'image'" >
+      <img src="" alt="" class="file-image" v-for="item in 2">
+      <img class="file-image" v-for="(option,index) in item.data" :key="index" :src="option">
+    </div>
   </el-form-item>
 </template>
 
 <style>
+  .file-image {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+  }
 .el-date-editor,
 .el-select {
   width: 100% !important;

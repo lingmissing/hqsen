@@ -4,6 +4,8 @@ import Login from './Login'
 import Test from './Test'
 // 列表
 import List from './List'
+// 审批
+import Approve from './Approve'
 // 详情
 import Detail from './Detail'
 // 新增
@@ -35,6 +37,11 @@ export default new Router({
           name: 'Detail',
           path: '/detail/:type',
           component: Detail
+        },
+        {
+          name: 'Approve',
+          path: '/approve/:type',
+          component: Approve
         },
         {
           name: 'Add',

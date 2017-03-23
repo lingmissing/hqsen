@@ -1,7 +1,6 @@
 <template>
   <div class="content-wrapper">
     <my-breadcrumb :data="breadcrumb"></my-breadcrumb>
-
     <div class="control-box">
       <el-input
         class="search-input"
@@ -14,7 +13,7 @@
       </el-input>
        <el-button
         class="add-btn"
-        v-if="type.indexOf(addBtnShowType) > -1"
+        v-if="addBtnType.indexOf(type) > -1"
         @click="addRow"
         type="primary">
         新增
@@ -32,13 +31,24 @@
           label="操作">
             <template scope="scope">
               <!--查看详情-->
-              <el-button @click="lookRow(scope)" size="small">查看详情</el-button>
+              <el-button @click="lookRow(scope)" size="small" v-if="detailBtnType.indexOf(type) > -1">查看详情</el-button>
               <!--禁用-->
-              <el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">禁用</el-button>
+              <el-button @click="disableRow(scope)" size="small" :plain="true" type="warn" v-if="disableBtnType.indexOf(type) > -1">禁用</el-button>
+              <!--<el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">启用</el-button>-->
               <!--编辑-->
-              <el-button @click="editRow(scope)" size="small">编辑</el-button>
+              <el-button @click="editRow(scope)" size="small" v-if="editBtnType.indexOf(type) > -1">编辑</el-button>
               <!--删除-->
-              <el-button @click="rmRow(scope)" size="small" :plain="true" type="danger">删除</el-button>
+              <el-button @click="deleteRow(scope)" size="small" :plain="true" type="danger" v-if="deleteBtnType.indexOf(type) > -1">删除</el-button>
+
+              
+              <!--<el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">查看搭建信息</el-button>
+              <el-button @click="goApprove(scope)"size="small" :plain="true" type="warn">审批</el-button>
+              <el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">重开</el-button>
+
+              
+              <el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">查看信息</el-button>
+              <el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">已完成</el-button>
+              <el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">完成打款</el-button>-->
             </template>
         </el-table-column>
       </my-table>
@@ -83,7 +93,11 @@
       return {
         type: '',           // 列表类型
         searchInput: '',    // 输入框
-        addBtnShowType: ['hotelAccount', 'innerAccount', 'customArea', 'hotel'],
+        detailBtnType: ['custom', 'build'],
+        editBtnType: ['hotelAccount', 'innerAccount', 'customArea', 'hotel'],
+        deleteBtnType: ['hotelAccount', 'innerAccount', 'customArea', 'hotel'],
+        disableBtnType: ['hotelAccount', 'innerAccount'],
+        addBtnType: ['hotelAccount', 'innerAccount', 'customArea', 'hotel'],
         breadcrumb: [],     // 导航条
         rowData: [{
           date: '2016-05-02',
@@ -165,7 +179,7 @@
         })
       },
       // --删除--
-      rmRow (data) {
+      deleteRow (data) {
 
       },
       // --添加--
@@ -173,6 +187,14 @@
         this.$router.push({
           path: '/add',
           name: 'Add',
+          params: { type: this.type }
+        })
+      },
+      // 审批
+      goApprove (scope) {
+        this.$router.push({
+          path: '/approve',
+          name: 'Approve',
           params: { type: this.type }
         })
       }
