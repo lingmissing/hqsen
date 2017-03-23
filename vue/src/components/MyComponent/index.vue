@@ -54,8 +54,8 @@
     </el-date-picker>
     <!--image-->
     <div class="image-form" v-else-if="item.type === 'image'" >
-      <img src="" alt="" class="file-image" v-for="item in 2">
-      <img class="file-image" v-for="(option,index) in item.data" :key="index" :src="option">
+      <img @click="imageView(index)" class="file-image" v-for="(option,index) in 4" :key="index" :src="option">
+      <image-view :open="true"></image-view>
     </div>
   </el-form-item>
 </template>
@@ -66,14 +66,15 @@
     height: 60px;
     margin-right: 10px;
   }
-.el-date-editor,
-.el-select {
-  width: 100% !important;
-}
+  .el-date-editor,
+  .el-select {
+    width: 100% !important;
+  }
 </style>
 
 <script>
   import { FormItem, Input, Select, Option, CheckboxGroup, Checkbox, RadioGroup, Radio, DatePicker } from 'element-ui'
+  import ImageView from '../ImageView'
   export default {
     components: {
       ElFormItem: FormItem,
@@ -84,7 +85,8 @@
       ElCheckbox: Checkbox,
       ElRadioGroup: RadioGroup,
       ElRadio: Radio,
-      ElDatePicker: DatePicker
+      ElDatePicker: DatePicker,
+      ImageView
     },
     props: {
       // item containe placeholder type name disabled data multiple
@@ -92,15 +94,6 @@
         type: Object,
         required: true
       },
-      // multiple: {
-      //   type: Boolean,
-      //   default: false
-      // },
-      // disabled: {
-      //   type: Boolean,
-      //   default: false
-      // },
-      // data: Array,
       value: {}
     },
     data () {
