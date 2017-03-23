@@ -1,18 +1,27 @@
 <template>
-  <div class="image-view-box" v-if="showView">
-    <span class="delete-image-btn el-icon-close" @click="closeImageLayer"></span>
-    <div class="image-content">
-      <el-carousel :height="500" arrow="never" :autoplay="false" :initial-index="2">
-        <el-carousel-item v-for="item in 4" :key="item">
-          <!--<h3>{{ item }}</h3>-->
-          <img src="http://www.desktopwallpaperhd.net/thumbs/8/7/xiaogoukuanping-animal-tupian-85399.jpg" alt="">
-        </el-carousel-item>
-      </el-carousel>
+  <div class="image-box">
+    <div class="image-form">
+      <img @click="toggleImage(true,index)" class="file-image" v-for="(item,index) in 4" :key="index" :src="item">
+    </div>
+    <div class="image-view-box" v-if="showLayer">
+      <span class="delete-image-btn el-icon-close" @click="toggleImage(false)"></span>
+      <div class="image-content">
+        <el-carousel height="500" arrow="never" :autoplay="false" :initial-index="activeIndex">
+          <el-carousel-item v-for="item in 4" :key="item">
+            <img class="image-source" src="http://www.desktopwallpaperhd.net/thumbs/8/7/xiaogoukuanping-animal-tupian-85399.jpg">
+          </el-carousel-item>
+        </el-carousel>
+      </div>
     </div>
   </div>
 </template>
 
 <style>
+  .file-image {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+  }
   .image-view-box {
     position: fixed;
     top: 0;
@@ -28,31 +37,20 @@
       margin-top: -250px;
       width: 100%;
     }
+    & .image-source {
+      display: block;
+      margin: auto;
+    }
     & .delete-image-btn {
       display: block;
       position: absolute;
-      background: #000;
+      color: #fff;
       top: 10px;
       right: 10px;
       width: 50px;
       height: 50px;
     }
   }
-  /*.el-carousel__item h3 {
-    color: #475669;
-    font-size: 18px;
-    opacity: 0.75;
-    line-height: 300px;
-    margin: 0;
-  }
-  
-  .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-  }
-  
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
-  }*/
 </style>
 
 <script>
@@ -63,16 +61,18 @@
       ElCarouselItem: CarouselItem
     },
     props: {
-      open: Boolean
+      data: Array
     },
     data () {
       return {
-        showView: this.open
+        activeIndex: 0,
+        showLayer: false
       }
     },
     methods: {
-      closeImageLayer () {
-        this.showView = false
+      toggleImage (status, index) {
+        this.showLayer = status
+        this.activeIndex = index
       }
     }
   }

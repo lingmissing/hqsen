@@ -53,19 +53,13 @@
       :picker-options="pickerOptions">
     </el-date-picker>
     <!--image-->
-    <div class="image-form" v-else-if="item.type === 'image'" >
-      <img @click="imageView(index)" class="file-image" v-for="(option,index) in 4" :key="index" :src="option">
-      <image-view :open="true"></image-view>
-    </div>
+    <image-view 
+      v-else-if="item.type === 'image'" 
+      :data="item.data"></image-view>
   </el-form-item>
 </template>
 
 <style>
-  .file-image {
-    width: 60px;
-    height: 60px;
-    margin-right: 10px;
-  }
   .el-date-editor,
   .el-select {
     width: 100% !important;
@@ -99,6 +93,7 @@
     data () {
       return {
         currentValue: this.value,
+        showImageLayer: false,
         pickerOptions: {
           disabledDate (time) {
             return time.getTime() < Date.now() - 8.64e7
@@ -109,6 +104,11 @@
     watch: {
       currentValue (val) {
         this.$emit('input', val)
+      }
+    },
+    methods: {
+      toggleImage (status) {
+        this.showImageLayer = status
       }
     }
   }
