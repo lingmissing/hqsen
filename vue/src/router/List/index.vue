@@ -32,21 +32,40 @@
           label="操作">
             <template scope="scope">
               <!--查看详情-->
-              <el-button v-if="detailBtnType.indexOf(type) > -1" @click="lookRow(scope)" size="small">查看详情</el-button>
-              <!--禁用-->
-              <el-button v-if="disableBtnType.indexOf(type) > -1" @click="disableRow(scope)" size="small" :plain="true" type="warn">禁用</el-button>
-              <!--<el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">启用</el-button>-->
+              <el-button 
+                v-if="noDetailBtnType.indexOf(type) === -1" 
+                @click="lookRow(scope)" 
+                size="small">查看详情</el-button>
+              <!--禁用/启用-->
+              <el-button 
+                v-if="disableBtnType.indexOf(type) > -1" 
+                @click="disableRow(scope)" 
+                size="small" 
+                :plain="true" 
+                type="warn">禁用/启用</el-button>
               <!--编辑-->
-              <el-button v-if="editBtnType.indexOf(type) > -1" icon="edit" @click="editRow(scope)" size="small"></el-button>
+              <el-button 
+                v-if="operateBtnType.indexOf(type) > -1" 
+                icon="edit" 
+                @click="editRow(scope)" 
+                size="small"></el-button>
               <!--删除-->
-              <el-button v-if="deleteBtnType.indexOf(type) > -1" icon="delete" @click="deleteRow(scope)" size="small" :plain="true" type="danger"></el-button>
-              <!--审批-->
-              <el-button v-if="approveBtnType.indexOf(type) > -1" @click="goApprove(scope)" size="small" :plain="true" type="warn">审批</el-button>
-              <!--<el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">重开</el-button>
-
-              
-              <el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">已完成</el-button>
-              <el-button @click="disableRow(scope)" size="small" :plain="true" type="warn">完成打款</el-button>-->
+              <el-button 
+                v-if="operateBtnType.indexOf(type) > -1" 
+                icon="delete" @click="deleteRow(scope)" 
+                size="small" 
+                :plain="true" 
+                type="danger"></el-button>
+              <!--审批/重开-->
+              <el-button 
+                v-if="approveBtnType.indexOf(type) > -1" 
+                @click="goApprove(scope)" 
+                size="small" 
+                :plain="true" 
+                type="warn">审批/重开</el-button>
+              <!--已完成/完成打款-->
+              <span 
+                v-if="moneyBntType.indexOf(type) > -1">已完成/完成打款</span>
             </template>
         </el-table-column>
     </my-table>
@@ -72,7 +91,7 @@
 </style>
 
 <script>
-  import { TableColumn, Button, Input, MessageBox } from 'element-ui'
+  import { TableColumn, Button, Input, MessageBox, Message } from 'element-ui'
   import MyTable from '../../components/MyTable'
   import MyBreadcrumb from '../../components/MyBreadcrumb'
   import config from './config'
@@ -92,10 +111,11 @@
       return {
         type: '',           // 列表类型
         searchInput: '',    // 输入框
-        detailBtnType: ['custom', 'build', 'customPlay', 'buildPlay'],
+        hideOperate: false,
+        noDetailBtnType: ['hotel', 'customArea'],
+        moneyBntType: ['customPlay', 'buildPlay'],
         approveBtnType: ['customVerify', 'buildVerify'],
-        editBtnType: ['hotelAccount', 'innerAccount', 'customArea', 'hotel'],
-        deleteBtnType: ['hotelAccount', 'innerAccount', 'customArea', 'hotel'],
+        operateBtnType: ['hotelAccount', 'innerAccount', 'customArea', 'hotel'],
         disableBtnType: ['hotelAccount', 'innerAccount'],
         addBtnType: ['hotelAccount', 'innerAccount', 'customArea', 'hotel'],
         breadcrumb: [],     // 导航条
@@ -153,7 +173,10 @@
         if (searchInput) {
 
         } else {
-          console.log('查询内容不能为空')
+          Message({
+            message: '查询内容不能为空',
+            type: 'warn'
+          })
         }
       },
       // --查看详情--

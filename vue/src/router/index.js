@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+// 登录
 import Login from './Login'
 // 列表
 import List from './List'
@@ -7,9 +8,9 @@ import List from './List'
 import Approve from './Approve'
 // 详情
 import Detail from './Detail'
-// 新增
+// 新增,编辑
 import Add from './Add'
-// 编辑
+// 侧栏
 import SideLayout from './SideLayout'
 
 Vue.use(Router)
