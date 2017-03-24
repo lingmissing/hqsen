@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="table-box">
     <el-table
       :data="rowData"
       border>
@@ -23,6 +23,9 @@
 </template>
 
 <style>
+  .table-box {
+    position: relative;
+  }
   .my-pagination {
     text-align: right;
     margin-top: 10px;

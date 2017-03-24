@@ -15,6 +15,18 @@ import SideLayout from './SideLayout'
 
 Vue.use(Router)
 
+// 设置文件地址
+Vue.directive('loading', (el, binding) => {
+  const { modifiers, value } = binding
+  if (value) {
+    if (modifiers.background) {
+      el.style.backgroundImage = `url(${fileUrl}${value})`
+    } else if (modifiers.src) {
+      el.src = `${fileUrl}${value}`
+    }
+  }
+})
+
 export default new Router({
   mode: 'hash',
   routes: [

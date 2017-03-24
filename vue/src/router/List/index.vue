@@ -33,7 +33,7 @@
             <template scope="scope">
               <!--查看详情-->
               <el-button 
-                v-if="noDetailBtnType.indexOf(type) === -1" 
+                v-if="noDetailBtnType.indexOf(type) < 0" 
                 @click="lookRow(scope)" 
                 size="small">查看详情</el-button>
               <!--禁用/启用-->
@@ -112,7 +112,7 @@
         type: '',           // 列表类型
         searchInput: '',    // 输入框
         hideOperate: false,
-        noDetailBtnType: ['hotel', 'customArea'],
+        noDetailBtnType: ['hotel', 'customArea', 'hotelAccount', 'innerAccount'],
         moneyBntType: ['customPlay', 'buildPlay'],
         approveBtnType: ['customVerify', 'buildVerify'],
         operateBtnType: ['hotelAccount', 'innerAccount', 'customArea', 'hotel'],
@@ -161,7 +161,7 @@
       // 分页跳转
       handleCurrentChange (current) {
         console.log('currentpage', current)
-        Fetch('getData', { page: current }).then(response => {
+        Fetch('getData', { page: current }, 'post', true).then(response => {
           this.rowData = response
           this.currentPage = current
           this.total = response.total

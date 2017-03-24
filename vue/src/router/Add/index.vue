@@ -1,9 +1,9 @@
 <template>
   <div class="content-wrapper">
-    <my-breadcrumb :data="basicInfo.breadcrumb"/>
+    <my-breadcrumb :data="basicInfo.breadcrumb"></my-breadcrumb>
     <el-row>
       <el-col :span="8" :offset="8">
-        <el-form ref="myForm" label-width="90px" :model="formData" :rules="basicInfo.rules">
+        <el-form label-width="90px" :model="formData" :rules="basicInfo.rules">
           <my-component 
             v-for="(item,index) in basicInfo.formList" 
             :key="index"
