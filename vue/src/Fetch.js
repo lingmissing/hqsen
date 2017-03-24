@@ -61,10 +61,10 @@ export default function Fetch (url, data = {}, method = 'post', showLoading = fa
         })
       } else {
         console.log('Error', error.message)
-        Message({
-          message: '接口异常',
-          type: 'error'
-        })
+        // Message({
+        //   message: '接口异常',
+        //   type: 'error'
+        // })
       }
       console.log(error.config)
     })

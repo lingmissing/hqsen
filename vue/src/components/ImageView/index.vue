@@ -8,9 +8,9 @@
         :key="index" 
         :src="item.src">
     </div>
-    <div class="image-view-box" v-if="showLayer">
+    <div class="image-view-box" v-show="showLayer">
       <span class="delete-image-btn el-icon-close" @click="toggleImage(false)"></span>
-      <el-carousel height="500px" class="image-content" arrow="never" :autoplay="false" :initial-index="activeIndex">
+      <el-carousel ref="carousel" height="500px" class="image-content" arrow="never" :autoplay="false">
         <el-carousel-item v-for="item in newData" :key="item">
           <img 
             :width="item.width"
@@ -81,7 +81,6 @@
           const maxPercent = 2
           const percent = img.width / img.height
           if (percent > maxPercent) {
-            // 图片是长的
             width = maxWidth > img.width ? img.width : maxWidth
             height = width / percent
           } else {
@@ -100,14 +99,13 @@
     data () {
       return {
         newData: [],
-        activeIndex: 0,
         showLayer: false
       }
     },
     methods: {
       toggleImage (status, index) {
+        this.$refs.carousel.handleIndicatorClick(index || 0)
         this.showLayer = status
-        this.activeIndex = index
       }
     }
   }

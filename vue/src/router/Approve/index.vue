@@ -3,7 +3,7 @@
     <my-breadcrumb :data="basicInfo.breadcrumb"/>
     <el-row>
       <el-col :span="10" :offset="7">
-        <el-form label-width="90px" :model="formData" :rules="basicInfo.rules">
+        <el-form label-width="110px" :model="formData" :rules="basicInfo.rules">
           <el-row>
             <el-col :span="18">
               <my-component 
