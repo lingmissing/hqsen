@@ -59,7 +59,7 @@
       return {
         type: '',
         approveList: [{
-          type: 'checkbox',
+          type: 'radio',
           name: 'name',
           data: [{
             label: '通过',

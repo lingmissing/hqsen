@@ -6,10 +6,10 @@
 </template>
 
 <style>
-.form-btn {
-  float: right;
-  margin-left: 10px !important;
-}
+  .form-btn {
+    float: right;
+    margin-left: 10px !important;
+  }
 </style>
 
 <script>

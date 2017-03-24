@@ -20,7 +20,22 @@
       </el-button>
     </div>
 
-    <my-table 
+    
+<!--<el-popover
+  ref="deleteBtn"
+  placement="top"
+  width="160"
+  v-model="deleteLayer">
+  <p>这是一段内容这是一段内容确定删除吗？</p>
+  <div style="text-align: right; margin: 0">
+    <el-button size="mini" type="text" @click="deleteLayer = false">取消</el-button>
+    <el-button type="primary" size="mini" @click="deleteLayer = false">确定</el-button>
+  </div>
+</el-popover>
+
+<el-button v-popover:deleteBtn>删除</el-button>-->
+
+    <my-table
       @handleCurrentChange="handleCurrentChange($event)"
       :currentPage="currentPage"
       :total="total"
@@ -29,6 +44,7 @@
       :columnData="columnData">
         <el-table-column
           prop="control"
+          v-if="true"
           label="操作">
             <template scope="scope">
               <!--查看详情-->
@@ -42,7 +58,7 @@
                 @click="disableRow(scope)" 
                 size="small" 
                 :plain="true" 
-                type="warn">禁用/启用</el-button>
+                type="warn">禁用</el-button>
               <!--编辑-->
               <el-button 
                 v-if="operateBtnType.indexOf(type) > -1" 
@@ -52,7 +68,8 @@
               <!--删除-->
               <el-button 
                 v-if="operateBtnType.indexOf(type) > -1" 
-                icon="delete" @click="deleteRow(scope)" 
+                icon="delete" 
+                @click="deleteRow(scope)" 
                 size="small" 
                 :plain="true" 
                 type="danger"></el-button>
@@ -62,10 +79,10 @@
                 @click="goApprove(scope)" 
                 size="small" 
                 :plain="true" 
-                type="warn">审批/重开</el-button>
+                type="warn">审批</el-button>
               <!--已完成/完成打款-->
               <span 
-                v-if="moneyBntType.indexOf(type) > -1">已完成/完成打款</span>
+                v-if="moneyBntType.indexOf(type) > -1">已完成</span>
             </template>
         </el-table-column>
     </my-table>
@@ -73,25 +90,25 @@
 </template>
 
 <style>
-.control-box {
-  margin: 20px 0;
-  &:after {
-    content: "";
-    display: block;
-    clear: both;
+  .control-box {
+    margin: 20px 0;
+    &:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    & .search-input {
+      width: 250px;
+    }
+    & .add-btn {
+      margin-right: 10px;
+      float: right;
+    }
   }
-  & .search-input {
-    width: 250px;
-  }
-  & .add-btn {
-    margin-right: 10px;
-    float: right;
-  }
-}
 </style>
 
 <script>
-  import { TableColumn, Button, Input, MessageBox, Message } from 'element-ui'
+  import { TableColumn, Button, Input, MessageBox, Message, Popover } from 'element-ui'
   import MyTable from '../../components/MyTable'
   import MyBreadcrumb from '../../components/MyBreadcrumb'
   import config from './config'
@@ -102,13 +119,15 @@
       MyBreadcrumb,
       ElTableColumn: TableColumn,
       ElButton: Button,
-      ElInput: Input
+      ElInput: Input,
+      ElPopover: Popover
     },
     created () {
       this.setBasicInfo()
     },
     data () {
       return {
+        deleteLayer: false,
         type: '',           // 列表类型
         searchInput: '',    // 输入框
         hideOperate: false,
@@ -120,20 +139,24 @@
         addBtnType: ['hotelAccount', 'innerAccount', 'customArea', 'hotel'],
         breadcrumb: [],     // 导航条
         rowData: [{
+          id: 1,
           date: '2016-05-02',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄',
           hh: 'hhhhhh',
           dd: 'ddd'
         }, {
+          id: 2,
           date: '2016-05-04',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1517 弄'
         }, {
+          id: 3,
           date: '2016-05-01',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1519 弄'
         }, {
+          id: 4,
           date: '2016-05-03',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1516 弄'
@@ -171,7 +194,7 @@
       handSearch () {
         const { searchInput } = this
         if (searchInput) {
-
+          console.log(searchInput)
         } else {
           Message({
             message: '查询内容不能为空',

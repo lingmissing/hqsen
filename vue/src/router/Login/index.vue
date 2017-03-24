@@ -21,44 +21,44 @@
 </template>
 
 <style>
-.login-page {
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.form-row {
-  display: flex;
-  & .login-input {
-    flex: 1;
-  }
-}
-.login-title {
-  font-size: 30px;
-  color: #808080;
-  text-align: center;
-  margin-bottom: 20px;
-}
-.login-btn-box {
-  padding-left: 36px;
-  & .login-btn {
+  .login-page {
+    position: absolute;
     width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
   }
-}
-.login-icon {
-  display: block;
-  width: 36px;
-  height: 36px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 25px 25px;
-  &.icon-female {
-    background-image: url(../../assets/female.png);
+  .form-row {
+    display: flex;
+    & .login-input {
+      flex: 1;
+    }
   }
-  &.icon-key {
-    background-image: url(../../assets/key.png);
+  .login-title {
+    font-size: 30px;
+    color: #808080;
+    text-align: center;
+    margin-bottom: 20px;
   }
-}
+  .login-btn-box {
+    padding-left: 36px;
+    & .login-btn {
+      width: 100%;
+    }
+  }
+  .login-icon {
+    display: block;
+    width: 36px;
+    height: 36px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    &.icon-female {
+      background-image: url(../../assets/female.png);
+    }
+    &.icon-key {
+      background-image: url(../../assets/key.png);
+    }
+  }
 </style>
 
 <script>
