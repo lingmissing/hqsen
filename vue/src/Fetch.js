@@ -24,7 +24,7 @@ export default function Fetch (url, data = {}, method = 'post', showLoading = fa
     data = {...data, token}
   }
   const instance = axios.create({
-    baseURL: 'http://172.16.6.105:8080/rider/',
+    baseURL: 'http://www',
     timeout: 10000,
     validateStatus: function (status) {
       return status >= 200 && status < 300

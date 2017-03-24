@@ -73,7 +73,9 @@
           name: 'name',
           placehodler: '默认为123456'
         }],
-        formData: {},
+        formData: {
+          pic: ['http://img01.sogoucdn.com/app/a/100540002/457880.jpg', 'http://img.ivsky.com/img/tupian/pre/201612/03/zaocan_niunai_mianbao-011.jpg']
+        },
         basicInfo: {
           rules: {},
           formList: [],
