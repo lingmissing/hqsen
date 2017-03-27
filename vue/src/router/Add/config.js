@@ -71,16 +71,16 @@ export default {
       }]
     }, {
       label: '初始密码',
-      type: 'text',
+      type: 'password',
       name: 'name'
     }, {
       label: '重置用户密码',
-      type: 'text',
-      name: 'name'
+      type: 'password',
+      name: 'pass'
     }, {
       label: '再次确认密码',
-      type: 'text',
-      name: 'name'
+      type: 'password',
+      name: 'checkPass'
     }],
     rules: {
       area: [

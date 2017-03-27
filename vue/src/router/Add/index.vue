@@ -23,6 +23,7 @@
   import FormButton from '../../components/MyComponent/FormButton'
   import MyBreadcrumb from '../../components/MyBreadcrumb'
   import config from './config'
+  import Fetch from '../../Fetch'
   export default {
     components: {
       ElRow: Row,
@@ -38,16 +39,10 @@
     data () {
       return {
         type: '',
-        formData: {
-          name: '888',
-          type: [],
-          tel: []
-        },
-        basicInfo: {
-          rules: {},
-          formList: [],
-          breadcrumb: []
-        }
+        formData: {},
+        rules: {},
+        formList: [],
+        breadcrumb: []
       }
     },
     watch: {
@@ -55,14 +50,50 @@
     },
     methods: {
       setBasicInfo () {
+        const validatePass = (rule, value, callback) => {
+          if (value === '') {
+            callback(new Error('请输入密码'))
+          } else {
+            if (this.myForm.checkPass !== '') {
+              this.$refs.myForm.validateField('checkPass')
+            }
+            callback()
+          }
+        }
+        const validatePass2 = (rule, value, callback) => {
+          if (value === '') {
+            callback(new Error('请再次输入密码'))
+          } else if (value !== this.myForm.pass) {
+            callback(new Error('两次输入密码不一致!'))
+          } else {
+            callback()
+          }
+        }
+        const passrules = {
+          pass: [
+            { validator: validatePass, trigger: 'blur' }
+          ],
+          checkPass: [
+            { validator: validatePass2, trigger: 'blur' }
+          ]
+        }
         const type = this.$route.params.type
-        this.basicInfo = config[type]
+        const { rules, formList, breadcrumb } = config[type]
         this.type = type
+        this.formList = formList
+        this.breadcrumb = breadcrumb
+        this.rules = {
+          ...ruless,
+          ...passrules
+        }
       },
       submitForm () {
         this.$refs.myForm.validate((valid) => {
           if (valid) {
             console.log(this.formData)
+            Fetch('data', { formData }).then(response => {
+              console.log(response)
+            })
           } else {
             console.log('error submit!!')
             return false
@@ -71,10 +102,6 @@
       },
       cancleForm () {
         this.$refs.myForm.resetFields()
-        // this.formData = {
-        //   name: ''
-        // }
-        console.log('cancle')
       }
     }
   }

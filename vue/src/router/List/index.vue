@@ -110,7 +110,7 @@
 </style>
 
 <script>
-  import { TableColumn, Button, Input, MessageBox, Message, Popover } from 'element-ui'
+  import { TableColumn, Button, Input, MessageBox, Message } from 'element-ui'
   import MyTable from '../../components/MyTable'
   import MyBreadcrumb from '../../components/MyBreadcrumb'
   import config from './config'
@@ -121,8 +121,7 @@
       MyBreadcrumb,
       ElTableColumn: TableColumn,
       ElButton: Button,
-      ElInput: Input,
-      ElPopover: Popover
+      ElInput: Input
     },
     created () {
       this.setBasicInfo()
@@ -231,7 +230,7 @@
               const id = data.row.id
               this.rowData.map(item => {
                 if (item.id === id) {
-                  item.disabled = true
+                  item.disabled = !item.disabled
                 }
               })
             }
