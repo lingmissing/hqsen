@@ -67,6 +67,7 @@
   import { Form, FormItem, Button, Col, Row, Input } from 'element-ui'
   import MyComponent from '../../components/MyComponent'
   import FormButton from '../../components/MyComponent/FormButton'
+  import Fetch from '../../Fetch'
   export default {
     components: {
       ElForm: Form,
@@ -109,7 +110,11 @@
       submitForm (formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            // alert('submit!')
+            Fetch('ddd', { loginForm: this.loginForm }).then(response => {
+              console.log(response)
+              sessionStorage.setItem('token', '11111')
+              this.$router.push('/list/custom')
+            })
             sessionStorage.setItem('token', '11111')
             this.$router.push('/list/custom')
           } else {

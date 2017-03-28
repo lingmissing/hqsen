@@ -105,7 +105,7 @@
         this.$refs.myForm.validate((valid) => {
           if (valid) {
             console.log(this.formData)
-            Fetch('data', { formData }).then(response => {
+            Fetch('data', { formData: this.formData }).then(response => {
               console.log(response)
             })
           } else {

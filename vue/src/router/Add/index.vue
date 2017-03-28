@@ -83,7 +83,7 @@
         this.formList = formList
         this.breadcrumb = breadcrumb
         this.rules = {
-          ...ruless,
+          ...rules,
           ...passrules
         }
       },
@@ -91,6 +91,7 @@
         this.$refs.myForm.validate((valid) => {
           if (valid) {
             console.log(this.formData)
+            const { formData } = this
             Fetch('data', { formData }).then(response => {
               console.log(response)
             })
