@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import { Form, Row, Col } from 'element-ui'
+  import { Form, Row, Col, Message } from 'element-ui'
   import MyComponent from '../../components/MyComponent'
   import FormButton from '../../components/MyComponent/FormButton'
   import MyBreadcrumb from '../../components/MyBreadcrumb'
@@ -38,17 +38,30 @@
     },
     data () {
       return {
+        id: '',
         type: '',
-        formData: {},
+        formData: {
+          // 区域名
+          area_list: []
+        },
         rules: {},
-        formList: [],
-        breadcrumb: []
+        basicInfo: {
+          formList: [],
+          breadcrumb: []
+        }
       }
     },
     watch: {
       '$route': 'setBasicInfo'
     },
     methods: {
+      getInit (id) {
+        Fetch(this.basicInfo.detailUrlKey, { id }).then(response => {
+          let data = response.data
+          data.area_list && (data.area_list = data.area_list.split(','))
+          this.formData = data
+        })
+      },
       setBasicInfo () {
         const validatePass = (rule, value, callback) => {
           if (value === '') {
@@ -78,22 +91,33 @@
           ]
         }
         const type = this.$route.params.type
-        const { rules, formList, breadcrumb } = config[type]
+        const id = this.$route.query.id
+        // const { rules, formList, breadcrumb } = config[type]
+        this.basicInfo = config[type]
         this.type = type
-        this.formList = formList
-        this.breadcrumb = breadcrumb
-        this.rules = {
-          ...rules,
+        this.id = id
+        // this.formList = formList
+        // this.breadcrumb = breadcrumb
+        this.basicInfo.rules = {
+          ...this.basicInfo.rules,
           ...passrules
         }
+        id && this.getInit(id)
       },
       submitForm () {
+        const { id, basicInfo, formData } = this
+        formData.area_list && (formData.area_list = formData.area_list.join())
+        const url = id ? basicInfo.editUrlKey : basicInfo.createUrlKey
+        const data = id ? { ...formData, id } : { ...formData }
         this.$refs.myForm.validate((valid) => {
           if (valid) {
-            console.log(this.formData)
-            const { formData } = this
-            Fetch('data', { formData }).then(response => {
+            Fetch(url, data).then(response => {
               console.log(response)
+              Message({
+                message: '保存成功',
+                type: 'success'
+              })
+              this.$router.push(basicInfo.returnUrl)
             })
           } else {
             console.log('error submit!!')

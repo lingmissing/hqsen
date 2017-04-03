@@ -86,13 +86,13 @@
           label: 'icon-female',
           form: {
             type: 'text',
-            name: 'name'
+            name: 'user_name'
           }
         }, {
           label: 'icon-key',
           form: {
             type: 'password',
-            name: 'pwd'
+            name: 'password'
           }
         }],
         rules: {
@@ -110,13 +110,12 @@
       submitForm (formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            Fetch('ddd', { loginForm: this.loginForm }).then(response => {
+            console.log(this.loginForm)
+            Fetch('login', { ...this.loginForm }).then(response => {
               console.log(response)
-              sessionStorage.setItem('token', '11111')
-              this.$router.push('/list/custom')
+              sessionStorage.setItem('access_token', response.data.access_token)
+              this.$router.push('/list/order_info__kezi_list')
             })
-            sessionStorage.setItem('token', '11111')
-            this.$router.push('/list/custom')
           } else {
             console.log('error submit!!')
             return false
