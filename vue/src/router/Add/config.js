@@ -19,16 +19,24 @@ export const getConfig = (config) => {
         label: '具体地址',
         type: 'text',
         name: 'hotel_address'
+      }, {
+        label: '酒店等级',
+        type: 'select',
+        name: 'hotel_level',
+        data: config.hotel_level
       }],
       rules: {
         hotel_name: [
           { required: true, message: '请输入酒店名称', trigger: 'blur' }
         ],
         area_id: [
-          { required: true, message: '请选中所在区', trigger: 'blur' }
+          { required: true, message: '请选择所在区', trigger: 'blur' }
         ],
         hotel_address: [
           { required: true, message: '请输入具体地址', trigger: 'blur' }
+        ],
+        hotel_level: [
+          { required: true, message: '请选择酒店等级', trigger: 'blur' }
         ]
       },
       breadcrumb: ['基础信息设定', '酒店信息', '新增酒店']
