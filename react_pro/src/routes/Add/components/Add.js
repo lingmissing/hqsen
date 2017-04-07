@@ -18,12 +18,13 @@ class Add extends Component {
   }
 
   handleSubmit (e) {
+    const { id } = this.props.location.query
     const { submitForm, form } = this.props
     e.preventDefault()
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values)
-        submitForm(values, this.context.router)
+        submitForm(id, values, this.context.router)
       }
     })
   }

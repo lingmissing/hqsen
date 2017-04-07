@@ -14,7 +14,7 @@ export const clearData = createAction('清除添加页面数据')
 export const getInit = (type, id) => {
   return (dispatch, getState) => {
     const basicInfo = config[type]
-    dispatch(setBasicInfo({ ...basicInfo, type }))
+    dispatch(setBasicInfo({ ...basicInfo, type, id }))
     if (id) {
       Fetch(basicInfo.detailUrlKey, { id }).then(response => {
         dispatch(saveForm(response.data))
@@ -32,14 +32,14 @@ export const getDataSource = (type, id) => {
   }
 }
 
-export const submitForm = (data, router) => {
+export const submitForm = (id, data, router) => {
   return (dispatch, getState) => {
-    const { id, basicInfo } = getState().Add
-    const url = id ? basicInfo.editUrlKey : basicInfo.createUrlKey
+    const { editUrlKey, createUrlKey, type } = getState().Add.basicInfo
+    const url = id ? editUrlKey : createUrlKey
     const formData = id ? { ...data, id } : { ...data }
     Fetch(url, formData).then(response => {
       message.success('提交成功')
-      router.push(`/list/${basicInfo.type}`)
+      router.push(`/list/${type}`)
     })
   }
 }
@@ -82,10 +82,12 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-  id: '',
   loading: false,
-  formData: [],
+  formData: {
+    area_list: []
+  },
   basicInfo: {
+    id: '',
     formList: [],
     breadcrumb: []
   },
