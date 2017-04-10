@@ -12,6 +12,7 @@ export const setResultInfo = createAction('获取结果数据', (current, data) 
 export const toggleLoading = createAction('切换loading')
 export const changeSearchInput = createAction('记录输入框数据')
 export const setInitialState = createAction('初始化数据')
+export const setDisableRow = createAction('禁用数据')
 
 
 export const handleCurrentChange = (current) => {
@@ -35,6 +36,15 @@ export const deleteRow = (id) => {
   }
 }
 
+export const disabledRow = (id) => {
+  return (dispatch, getState) => {
+    const { basicInfo } = getState().List
+    Fetch(basicInfo.disableUrlKey, { id }).then(response => {
+      dispatch(setDisableRow(id))
+    }, () => { dispatch(toggleLoading(false)) })
+  }
+}
+
 export const initData = (type) => {
   return (dispatch, getState) => {
     dispatch(setInitialState())
@@ -51,7 +61,8 @@ export const actions = {
   changeSearchInput,
   setInitialState,
   initData,
-  deleteRow
+  deleteRow,
+  disabledRow
 }
 
 // ------------------------------------

@@ -43,9 +43,14 @@ class List extends Component {
     this.context.router.push(`/add/${type}`)
   }
 
+  setRowClass (record) {
+    if (record.hotel_name === '对对对') {
+      return 'disabled-row'
+    }
+  }
   render () {
     const { pageInfo, resultInfo, searchInput, loading, basicInfo } = this.props.List
-    const { handleCurrentChange, changeSearchInput, deleteRow, configData } = this.props
+    const { handleCurrentChange, changeSearchInput, deleteRow, configData, disabledRow } = this.props
     const columns = {
       // 客资信息
       order_info_kezi_list: [{
@@ -72,6 +77,44 @@ class List extends Component {
       }, {
         key: 'area_hotel_name',
         dataIndex: 'area_hotel_name',
+        title: '酒店/区域名称'
+      }, {
+        key: 'detail',
+        dataIndex: 'detail',
+        title: '操作',
+        render: (text, record) => {
+          const id = record[basicInfo.uniqueKey]
+          return (
+            <Button
+              type="default"
+              onClick={() => this.gotoDetail(id)}>查看详情</Button>
+          )
+        }
+      }],
+      // 搭建信息
+      order_info_dajian_list: [{
+        key: 'date',
+        dataIndex: '',
+        title: '序号'
+      }, {
+        key: 'key',
+        dataIndex: '',
+        title: '姓名'
+      }, {
+        key: 'address',
+        dataIndex: '',
+        title: '手机号'
+      }, {
+        key: 'jj',
+        dataIndex: '',
+        title: '订单来源'
+      }, {
+        key: '3',
+        dataIndex: '',
+        title: '指定类型'
+      }, {
+        key: '2',
+        dataIndex: '',
         title: '酒店/区域名称'
       }, {
         key: 'detail',
@@ -141,6 +184,31 @@ class List extends Component {
         dataIndex: 'alipay_account',
         title: '支付宝账号'
       }],
+      account_info_hotel_list: [{
+        key: 'user_id',
+        dataIndex: 'user_id',
+        title: '序号'
+      }, {
+        key: 'user_name',
+        dataIndex: 'user_name',
+        title: '账号名称'
+      }, {
+        key: 'alipay_account',
+        dataIndex: 'alipay_account',
+        title: '所属酒店'
+      }, {
+        key: 'alipay_account',
+        dataIndex: 'alipay_account',
+        title: '酒店所在区'
+      }, {
+        key: 'alipay_account',
+        dataIndex: 'alipay_account',
+        title: '状态'
+      }, {
+        key: 'alipay_account',
+        dataIndex: 'alipay_account',
+        title: '操作'
+      }],
       // 意见反馈
       feedback_info: [{
         key: 'id',
@@ -164,6 +232,9 @@ class List extends Component {
       const id = record[basicInfo.uniqueKey]
       return (
         <div>
+          <Popconfirm title="确定禁用该条数据?" onConfirm={() => disabledRow(id)}>
+            <Button type="primary" icon="unlock" ghost shape="circle" style={{ marginRight: 5 }} />
+          </Popconfirm>
           <Button type="primary" icon="edit" ghost shape="circle" style={{ marginRight: 5 }}
             onClick={() => this.editRow(id)} />
           <Popconfirm title="确定删除该条数据?" onConfirm={() => deleteRow(id)}>
@@ -207,6 +278,7 @@ class List extends Component {
           pagination={pagination}
           onChange={(pageInfo) => handleCurrentChange(pageInfo.current)}
           dataSource={resultInfo.list}
+          rowClassName={(record) => this.setRowClass(record)}
           columns={columns[basicInfo.type]} />
       </div>
     )
@@ -214,6 +286,7 @@ class List extends Component {
 }
 
 List.propTypes = {
+  disabledRow: PropTypes.func,
   configData: PropTypes.object,
   deleteRow: PropTypes.func,
   initData: PropTypes.func,

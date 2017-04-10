@@ -7,26 +7,7 @@ export default {
   },
   // 搭建详情
   order_info_dajian_list: {
-    breadcrumb: ['客资/搭建信息', '搭建信息列表'],
-    columnData: [{
-      name: 'date',
-      label: '序号'
-    }, {
-      name: 'name',
-      label: '姓名'
-    }, {
-      name: 'address',
-      label: '手机号'
-    }, {
-      name: 'jj',
-      label: '订单来源'
-    }, {
-      name: '3',
-      label: '指定类型'
-    }, {
-      name: '2',
-      label: '酒店/区域名称'
-    }]
+    breadcrumb: ['客资/搭建信息', '搭建信息列表']
   },
   // 酒店列表
   hotel_info_hotel_list: {
