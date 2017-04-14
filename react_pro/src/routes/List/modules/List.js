@@ -1,6 +1,6 @@
 import { createAction } from 'redux-act'
 import { message } from 'antd'
-import Fetch from '../../../Fetch'
+import Fetch from 'root/Fetch'
 import config from './config'
 
 // ------------------------------------

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import './List.scss'
 import { Table, Input, Button, Popconfirm } from 'antd'
-import MyBreadcrumb from '../../../components/MyBreadcrumb'
+import MyBreadcrumb from 'components/MyBreadcrumb'
 const Search = Input.Search
 
 class List extends Component {

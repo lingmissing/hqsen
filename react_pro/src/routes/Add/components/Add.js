@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Form, Button, Popconfirm } from 'antd'
-import MyBreadcrumb from '../../../components/MyBreadcrumb'
-import FormComponent from '../../../components/FormComponent'
+import MyBreadcrumb from 'components/MyBreadcrumb'
+import FormComponent from 'components/FormComponent'
 import './Add.scss'
 
 class Add extends Component {
