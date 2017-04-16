@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import './List.scss'
 import { Table, Input, Button, Popconfirm } from 'antd'
-import MyBreadcrumb from 'components/MyBreadcrumb'
+import MyBreadcrumb from '../../../components/MyBreadcrumb'
 const Search = Input.Search
 
 class List extends Component {
@@ -44,7 +44,7 @@ class List extends Component {
   }
 
   setRowClass (record) {
-    if (record.hotel_name === '对对对') {
+    if (record['user_status'] === '2') {
       return 'disabled-row'
     }
   }
@@ -71,7 +71,7 @@ class List extends Component {
         title: '指定类型',
         render: text => {
           const orderType = configData.order_type
-          const name = orderType.filter(item => item.value === text)[0].label
+          const name = orderType.length ? orderType.filter(item => item.value === text)[0].label : ''
           return <span>{name}</span>
         }
       }, {
@@ -171,6 +171,7 @@ class List extends Component {
         title: '操作',
         render: (text, record) => renderControlBtn(record)
       }],
+      // 注册账号
       account_info_register_list: [{
         key: 'user_id',
         dataIndex: 'user_id',
@@ -183,31 +184,6 @@ class List extends Component {
         key: 'alipay_account',
         dataIndex: 'alipay_account',
         title: '支付宝账号'
-      }],
-      account_info_hotel_list: [{
-        key: 'user_id',
-        dataIndex: 'user_id',
-        title: '序号'
-      }, {
-        key: 'user_name',
-        dataIndex: 'user_name',
-        title: '账号名称'
-      }, {
-        key: 'alipay_account',
-        dataIndex: 'alipay_account',
-        title: '所属酒店'
-      }, {
-        key: 'alipay_account',
-        dataIndex: 'alipay_account',
-        title: '酒店所在区'
-      }, {
-        key: 'alipay_account',
-        dataIndex: 'alipay_account',
-        title: '状态'
-      }, {
-        key: 'alipay_account',
-        dataIndex: 'alipay_account',
-        title: '操作'
       }],
       // 意见反馈
       feedback_info: [{
@@ -226,15 +202,73 @@ class List extends Component {
         key: 'phone',
         dataIndex: 'phone',
         title: '联系方式'
+      }],
+      // 酒店账户列表
+      account_info_hotel_list: [{
+        key: 'user_id',
+        dataIndex: 'user_id',
+        title: '序号'
+      }, {
+        key: 'user_name',
+        dataIndex: 'user_name',
+        title: '账号名称'
+      }, {
+        key: 'hotel_name',
+        dataIndex: 'hotel_name',
+        title: '所属酒店'
+      }, {
+        key: 'hotel_area',
+        dataIndex: 'hotel_area',
+        title: '酒店所在区'
+      }, {
+        key: 'user_status',
+        dataIndex: 'user_status',
+        title: '状态',
+        render: (text) => <span>{text === '1' ? '已启用' : '已禁用'}</span>
+      }, {
+        key: 'control',
+        dataIndex: 'control',
+        title: '操作',
+        render: (text, record) => renderControlBtn(record, true)
+      }],
+      // 内部账号
+      account_info_inner_list: [{
+        key: 'user_id',
+        dataIndex: 'user_id',
+        title: '序号'
+      }, {
+        key: 'user_name',
+        dataIndex: 'user_name',
+        title: '账号名称'
+      }, {
+        key: 'user_type',
+        dataIndex: 'user_type',
+        title: '账号类型'
+      }, {
+        key: 'user_status',
+        dataIndex: 'user_status',
+        title: '状态',
+        render: (text) => <span>{text === '1' ? '已启用' : '已禁用'}</span>
+      }, {
+        key: 'control',
+        dataIndex: 'control',
+        title: '操作',
+        render: (text, record) => renderControlBtn(record, true)
       }]
     }
-    const renderControlBtn = (record) => {
+    const renderControlBtn = (record, showDisabled) => {
       const id = record[basicInfo.uniqueKey]
+      const dataStatus = record['user_status']
       return (
         <div>
-          <Popconfirm title="确定禁用该条数据?" onConfirm={() => disabledRow(id)}>
-            <Button type="primary" icon="unlock" ghost shape="circle" style={{ marginRight: 5 }} />
+          { showDisabled &&
+          <Popconfirm
+            title={`确定${dataStatus === '1' ? '禁用' : '启用'}该条数据?`}
+            onConfirm={() => disabledRow(id, dataStatus)}>
+            <Button type="primary"
+              icon={dataStatus === '1' ? 'unlock' : 'lock'} ghost shape="circle" style={{ marginRight: 5 }} />
           </Popconfirm>
+          }
           <Button type="primary" icon="edit" ghost shape="circle" style={{ marginRight: 5 }}
             onClick={() => this.editRow(id)} />
           <Popconfirm title="确定删除该条数据?" onConfirm={() => deleteRow(id)}>

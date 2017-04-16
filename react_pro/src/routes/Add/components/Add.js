@@ -2,15 +2,24 @@ import React, { Component, PropTypes } from 'react'
 import { Form, Button, Popconfirm } from 'antd'
 import MyBreadcrumb from 'components/MyBreadcrumb'
 import FormComponent from 'components/FormComponent'
+import ConfirmComponent from './ConfirmComponent'
 import './Add.scss'
-
 class Add extends Component {
+  constructor () {
+    super()
+    this.state = {
+      showConfirm: false
+    }
+  }
 
   componentWillMount () {
     const { getDataSource } = this.props
     const { type } = this.props.params
     const { id } = this.props.location.query
     getDataSource(type, id)
+    this.setState({
+      showConfirm: type === 'account_info_hotel_list' || type === 'account_info_inner_list'
+    })
   }
 
   componentWillUnmount () {
@@ -38,7 +47,7 @@ class Add extends Component {
     const { basicInfo, dataSource, formData, loading } = this.props.Add
     let configData = { ...this.props.configData, ...dataSource }
     configData.area_id = configData.config_area
-    console.log('-------------', configData, formData)
+    configData.user_type = configData.inner_type
     return (
       <div className="add-page">
         <MyBreadcrumb breadcrumb={basicInfo.breadcrumb} />
@@ -51,7 +60,8 @@ class Add extends Component {
               dataSource={configData[item.name]}
               defaultValue={formData[item.name]} />
           })
-        }
+          }
+          { this.state.showConfirm && basicInfo.type && <ConfirmComponent form={this.props.form} id={basicInfo.id} />}
           <Form.Item>
             <Popconfirm title="确认提交?" onConfirm={(e) => this.handleSubmit(e)}>
               <Button className="add-btn" type="primary" loading={loading}>提交</Button>

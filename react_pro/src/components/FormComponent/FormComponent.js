@@ -64,8 +64,11 @@ class FormComponent extends Component {
         sm: { span: 14 }
       }
     }
+    item.status = item.status || ''
+    // validateStatus="item.status"
+    console.log(item.status, 'status-----------')
     return (
-      <Form.Item label={item.label} {...formItemLayout} validateStatus="item.status">
+      <Form.Item label={item.label} {...formItemLayout} >
         {getFieldDecorator(item.name, {
           initialValue: defaultValue,
           rules: ruleList

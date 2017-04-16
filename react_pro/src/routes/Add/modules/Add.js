@@ -30,10 +30,17 @@ export const getInit = (type, id) => {
 // eslint-disable-line
 export const getDataSource = (type, id) => {
   return (dispatch, getState) => {
-    Fetch('getShanghaiArea', { id }).then(response => {
-      dispatch(saveDataSource({ area_list: response.data.area_sh }))
-      dispatch(getInit(type, id))
-    })
+    if (type === 'account_info_hotel_list') {
+      Fetch('getHotelSelect').then(response => {
+        dispatch(saveDataSource({ hotel_id: response.data.list }))
+        dispatch(getInit(type, id))
+      })
+    } else {
+      Fetch('getShanghaiArea', { id }).then(response => {
+        dispatch(saveDataSource({ area_list: response.data.area_sh }))
+        dispatch(getInit(type, id))
+      })
+    }
   }
 }
 
@@ -63,6 +70,10 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [setBasicInfo]: (state, action) => {
+    const { id } = action.payload
+    if (id) {
+      action.payload.formList.map(item => { item.disabled = true })
+    }
     return {
       ...state,
       basicInfo: action.payload
