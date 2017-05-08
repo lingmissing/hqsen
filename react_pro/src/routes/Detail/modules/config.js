@@ -52,12 +52,6 @@ export default {
       disabled: true,
       rules: { required: true }
     }, {
-      label: '跟踪者',
-      type: 'text',
-      name: 'watch_user',
-      disabled: true,
-      rules: { required: true }
-    }, {
       label: '备注',
       type: 'textarea',
       name: 'order_desc',
@@ -68,40 +62,41 @@ export default {
   },
   // 搭建详情
   order_info_dajian_list: {
+    detailUrlKey: 'dajianDetail',
     formList: [{
       label: '姓名',
       type: 'text',
-      name: 'name',
+      name: 'customer_name',
       disabled: true
     }, {
       label: '类型',
       type: 'select',
-      name: 'type',
+      name: 'order_type',
       disabled: true
     }, {
       label: '手机号',
       type: 'text',
-      name: 'tel',
+      name: 'order_phone',
       disabled: true
     }, {
       label: '区域',
       type: 'select',
-      name: 'area',
+      name: 'order_area',
       disabled: true
     }, {
       label: '预算',
       type: 'text',
-      name: 'name',
+      name: 'order_money',
       disabled: true
     }, {
       label: '时间',
       type: 'date',
-      name: 'name',
+      name: 'use_date',
       disabled: true
     }, {
-      label: '',
+      label: '备注',
       type: 'textarea',
-      name: 'name',
+      name: 'order_desc',
       disabled: true
     }],
     rules: {

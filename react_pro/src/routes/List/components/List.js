@@ -93,28 +93,28 @@ class List extends Component {
       }],
       // 搭建信息
       order_info_dajian_list: [{
-        key: 'date',
-        dataIndex: '',
+        key: 'order_id',
+        dataIndex: 'order_id',
         title: '序号'
       }, {
-        key: 'key',
-        dataIndex: '',
+        key: 'customer_name',
+        dataIndex: 'customer_name',
         title: '姓名'
       }, {
-        key: 'address',
-        dataIndex: '',
+        key: 'order_phone',
+        dataIndex: 'order_phone',
         title: '手机号'
       }, {
-        key: 'jj',
-        dataIndex: '',
+        key: 'order_from',
+        dataIndex: 'order_from',
         title: '订单来源'
       }, {
-        key: '3',
-        dataIndex: '',
+        key: 'order_area_hotel_type',
+        dataIndex: 'order_area_hotel_type',
         title: '指定类型'
       }, {
-        key: '2',
-        dataIndex: '',
+        key: 'area_hotel_name',
+        dataIndex: 'area_hotel_name',
         title: '酒店/区域名称'
       }, {
         key: 'detail',
@@ -254,6 +254,192 @@ class List extends Component {
         dataIndex: 'control',
         title: '操作',
         render: (text, record) => renderControlBtn(record, true)
+      }],
+      // 财务审批——客资
+      finance_info_kezi_contract: [{
+        key: 'user_id',
+        dataIndex: 'user_id',
+        title: '序号'
+      }, {
+        key: 'user_name',
+        dataIndex: 'user_name',
+        title: '合同金额'
+      }, {
+        key: 'user_type',
+        dataIndex: 'user_type',
+        title: '附加款金额'
+      }, {
+        key: 'user_status',
+        dataIndex: 'user_status',
+        title: '合同附件'
+      }, {
+        key: 'user_status1',
+        dataIndex: 'user_status1',
+        title: '状态'
+      }, {
+        key: 'control',
+        dataIndex: 'control',
+        title: '操作',
+        render: (text, record) => renderApproveControl(record)
+      }],
+      // 财务审批——搭建
+      finance_info_dajian_contract: [{
+        key: 'user_id',
+        dataIndex: 'user_id',
+        title: '序号'
+      }, {
+        key: 'user_name',
+        dataIndex: 'user_name',
+        title: '合同金额'
+      }, {
+        key: 'user_name1',
+        dataIndex: 'user_name1',
+        title: '审批类型'
+      }, {
+        key: 'user_type',
+        dataIndex: 'user_type',
+        title: '提交审批者'
+      }, {
+        key: 'user_status',
+        dataIndex: 'user_status',
+        title: '合同附件'
+      }, {
+        key: 'user_status1',
+        dataIndex: 'user_status1',
+        title: '状态'
+      }, {
+        key: 'control',
+        dataIndex: 'control',
+        title: '操作',
+        render: (text, record) => renderApproveControl(record)
+      }],
+      // 总经理审批——客资
+      manager_info_kezi_contract: [{
+        key: 'user_id',
+        dataIndex: 'user_id',
+        title: '序号'
+      }, {
+        key: 'user_name',
+        dataIndex: 'user_name',
+        title: '合同金额'
+      }, {
+        key: 'user_type',
+        dataIndex: 'user_type',
+        title: '附加款金额'
+      }, {
+        key: 'user_status',
+        dataIndex: 'user_status',
+        title: '合同附件'
+      }, {
+        key: 'user_status1',
+        dataIndex: 'user_status1',
+        title: '状态'
+      }, {
+        key: 'control',
+        dataIndex: 'control',
+        title: '操作',
+        render: (text, record) => renderApproveControl(record)
+      }],
+      // 总经理审批——搭建
+      manager_info_dajian_contract: [{
+        key: 'user_id',
+        dataIndex: 'user_id',
+        title: '序号'
+      }, {
+        key: 'user_name',
+        dataIndex: 'user_name',
+        title: '合同金额'
+      }, {
+        key: 'user_name1',
+        dataIndex: 'user_name1',
+        title: '审批类型'
+      }, {
+        key: 'user_type',
+        dataIndex: 'user_type',
+        title: '提交审批者'
+      }, {
+        key: 'user_status',
+        dataIndex: 'user_status',
+        title: '合同附件'
+      }, {
+        key: 'user_status1',
+        dataIndex: 'user_status1',
+        title: '状态'
+      }, {
+        key: 'control',
+        dataIndex: 'control',
+        title: '操作',
+        render: (text, record) => renderApproveControl(record)
+      }],
+      // 打款--客资
+      remittance_info_kezi_contract: [{
+        key: 'user_id',
+        dataIndex: 'user_id',
+        title: '序号'
+      }, {
+        key: 'user_name',
+        dataIndex: 'user_name',
+        title: '合同金额'
+      }, {
+        key: 'user_name1',
+        dataIndex: 'user_name1',
+        title: '附加款金额'
+      }, {
+        key: 'user_type',
+        dataIndex: 'user_type',
+        title: '提供者账号'
+      }, {
+        key: 'user_status',
+        dataIndex: 'user_status',
+        title: '提供者分成'
+      }, {
+        key: 'user_typ1e',
+        dataIndex: 'user_typ1e',
+        title: '跟踪者账号'
+      }, {
+        key: 'user_status2',
+        dataIndex: 'user_status2',
+        title: '跟踪者分成'
+      }, {
+        key: 'user_status1',
+        dataIndex: 'user_status1',
+        title: '状态'
+      }, {
+        key: 'control',
+        dataIndex: 'control',
+        title: '操作',
+        render: (text, record) => renderApproveControl(record)
+      }],
+      // 打款--搭建
+      remittance_info_dajian_contract: [{
+        key: 'user_id',
+        dataIndex: 'user_id',
+        title: '序号'
+      }, {
+        key: 'user_name',
+        dataIndex: 'user_name',
+        title: '合同金额'
+      }, {
+        key: 'user_name1',
+        dataIndex: 'user_name1',
+        title: '首付金额'
+      }, {
+        key: 'user_type',
+        dataIndex: 'user_type',
+        title: '提供者账号'
+      }, {
+        key: 'user_status',
+        dataIndex: 'user_status',
+        title: '提供者分成'
+      }, {
+        key: 'user_status1',
+        dataIndex: 'user_status1',
+        title: '状态'
+      }, {
+        key: 'control',
+        dataIndex: 'control',
+        title: '操作',
+        render: (text, record) => renderApproveControl(record)
       }]
     }
     const renderControlBtn = (record, showDisabled) => {
@@ -274,6 +460,14 @@ class List extends Component {
           <Popconfirm title="确定删除该条数据?" onConfirm={() => deleteRow(id)}>
             <Button type="danger" icon="delete" ghost shape="circle" />
           </Popconfirm>
+        </div>
+      )
+    }
+    const renderApproveControl = (record) => {
+      return (
+        <div>
+          <Button type="primary">查看信息</Button>
+          <Button type="primary">审批/重开</Button>
         </div>
       )
     }

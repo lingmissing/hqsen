@@ -7,6 +7,8 @@ export default {
   },
   // 搭建详情
   order_info_dajian_list: {
+    listUrlKey: 'dajianList',
+    uniqueKey: 'order_id',
     breadcrumb: ['客资/搭建信息', '搭建信息列表']
   },
   // 酒店列表

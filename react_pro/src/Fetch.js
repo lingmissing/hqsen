@@ -24,6 +24,7 @@ const urlKey = {
   keziDetail: 'c=kezi&f=keziDetail',
   // 搭建列表详情
   dajianList: 'c=dajian&f=dajianList',
+  dajianDetail: 'c=dajian&f=dajianDetail',
   createdajian: 'c=dajian&f=dajianCreate',
   getShanghaiArea: 'c=area&f=areaSH',
   feedback: 'c=user&f=feedback',
@@ -40,8 +41,9 @@ const urlKey = {
   innerAccountDetail: 'c=account&f=innerAccountDetail',
   innerAccountEdit: 'c=account&f=accountEdit',
   deleteInnerAccount: 'c=account&f=accountDelete',
+  getAreaList: 'c=account&f=areaList',
   // 超管重置密码
-  resetPwd: 'c=account&f=adminAccountEdit'
+  resetPwd: 'c=account&f=adminAccountEdit',
 }
 
 const formatData = (param) => {
