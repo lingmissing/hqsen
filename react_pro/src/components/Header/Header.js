@@ -10,7 +10,7 @@ class Header extends Component {
     if (e.key === 'account_info_password_back') {
       this.context.router.push('reset-password')
     } else if (e.key === 'remittance_info_remittance_ratio') {
-      this.context.router.push(`add/${e.key}`)
+      this.context.router.push(`add/${e.key}?id=0`)
     } else {
       this.context.router.push(`/list/${e.key}`)
     }

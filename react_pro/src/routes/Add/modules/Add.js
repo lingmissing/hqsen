@@ -71,7 +71,9 @@ export const submitForm = (id, data, router) => {
     Fetch(url, formData).then(response => {
       dispatch(toggleLoading(false))
       message.success('提交成功')
-      router.push(`/list/${type}`)
+      if (type !== 'remittance_info_remittance_ratio') {
+        router.push(`/list/${type}`)
+      }
     }, () => { dispatch(toggleLoading(false)) })
   }
 }

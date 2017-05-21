@@ -41,7 +41,9 @@ class Add extends Component {
   }
   cancleSubmit () {
     const { type } = this.props.params
-    this.context.router.push(`list/${type}`)
+    if (type !== 'remittance_info_remittance_ratio') {
+      this.context.router.push(`list/${type}`)
+    }
   }
   handleChange (name, value) {
     console.log(name, value)

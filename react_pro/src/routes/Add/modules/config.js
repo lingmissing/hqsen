@@ -88,24 +88,21 @@ export default {
   },
   // 设定打款系数
   remittance_info_remittance_ratio: {
+    detailUrlKey: 'payDetail',
+    editUrlKey: 'paySubmit',
     formList: [{
       label: '客资提供者系数',
       type: 'text',
-      name: 'name'
+      name: 'kezi_user'
     }, {
       label: '客资跟踪者系数',
       type: 'text',
-      name: 'type'
+      name: 'kezi_hotel'
     }, {
       label: '搭建提供者系数',
       type: 'text',
-      name: 'name'
+      name: 'dajian_user'
     }],
-    rules: {
-      area: [
-        { required: true, message: '请输入活动名称', trigger: 'blur' }
-      ]
-    },
     breadcrumb: ['设置提供者系数']
   },
   // 超管重置密码
