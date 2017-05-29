@@ -3,7 +3,6 @@ import { message } from 'antd'
 import { createAction } from 'redux-act'
 import Fetch from 'root/Fetch'
 
-
 // ------------------------------------
 // Actions
 // ------------------------------------

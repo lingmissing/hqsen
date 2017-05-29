@@ -1,13 +1,18 @@
 import { Form, Input, Select, Radio, Checkbox } from 'antd'
+import React, { Component, PropTypes } from 'react'
 import checkList from './checkList'
 import ImageView from '../ImageView'
 const CheckboxGroup = Checkbox.Group
 const RadioGroup = Radio.Group
 const Option = Select.Option
 
-import React, { Component, PropTypes } from 'react'
-
 class FormComponent extends Component {
+  static propTypes = {
+    dataSource: PropTypes.array,
+    item: PropTypes.object,
+    getFieldDecorator: PropTypes.func,
+    onChange: PropTypes.func
+  }
   handleChange (e) {
     const { item: { name }, onChange } = this.props
     onChange && onChange(name, e)
@@ -80,13 +85,6 @@ class FormComponent extends Component {
       )
     }
   }
-}
-
-FormComponent.propTypes = {
-  dataSource: PropTypes.array,
-  item: PropTypes.object,
-  getFieldDecorator: PropTypes.func,
-  onChange: PropTypes.func
 }
 
 export default FormComponent

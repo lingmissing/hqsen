@@ -5,6 +5,26 @@ import FormComponent from 'components/FormComponent'
 import ConfirmComponent from './ConfirmComponent'
 import './Add.scss'
 class Add extends Component {
+  static propTypes = {
+    Add: PropTypes.object,
+    form: PropTypes.object,
+    basicInfo: PropTypes.object,
+    configData: PropTypes.object,
+    formData: PropTypes.object,
+    getDataSource: PropTypes.func,
+    type: PropTypes.string,
+    id: PropTypes.string,
+    params: PropTypes.object,
+    query: PropTypes.object,
+    location: PropTypes.object,
+    submitForm: PropTypes.func,
+    clearData: PropTypes.func,
+    toggleAreaSelect: PropTypes.func
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
   constructor () {
     super()
     this.state = {
@@ -40,10 +60,11 @@ class Add extends Component {
     })
   }
   cancleSubmit () {
-    const { type } = this.props.params
-    if (type !== 'remittance_info_remittance_ratio') {
-      this.context.router.push(`list/${type}`)
-    }
+    // const { type } = this.props.params
+    // if (type !== 'remittance_info_remittance_ratio') {
+    //   this.context.router.push(`list/${type}`)
+    // }
+    this.context.router.goBack()
   }
   handleChange (name, value) {
     console.log(name, value)
@@ -91,28 +112,6 @@ class Add extends Component {
       </div>
     )
   }
-}
-
-Add.propTypes = {
-  Add: PropTypes.object,
-  form: PropTypes.object,
-  basicInfo: PropTypes.object,
-  configData: PropTypes.object,
-  formData: PropTypes.object,
-  getDataSource: PropTypes.func,
-  type: PropTypes.string,
-  id: PropTypes.string,
-  params: PropTypes.object,
-  query: PropTypes.object,
-  location: PropTypes.object,
-  submitForm: PropTypes.func,
-  clearData: PropTypes.func,
-  toggleAreaSelect: PropTypes.func
-}
-
-
-Add.contextTypes = {
-  router: React.PropTypes.object.isRequired
 }
 
 export default Form.create()(Add)

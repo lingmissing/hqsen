@@ -5,6 +5,17 @@ import { Input, Form, Popconfirm, Button } from 'antd'
 const FormItem = Form.Item
 
 class ResetPassword extends Component {
+  static propTypes = {
+    form: PropTypes.object,
+    id: PropTypes.string,
+    submitForm: PropTypes.func,
+    ResetPassword: PropTypes.object,
+    loading: PropTypes.bool
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
   constructor (props) {
     super(props)
     this.state = {
@@ -44,11 +55,14 @@ class ResetPassword extends Component {
     })
   }
   cancleSubmit () {
-    this.context.router.push(`list`)
+    // this.context.router.push(`list`)
+    this.context.router.goBack()
   }
   render () {
-    const { getFieldDecorator } = this.props.form
-    const { loading } = this.props.ResetPassword
+    const {
+      form: { getFieldDecorator },
+      ResetPassword: { loading }
+    } = this.props
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -110,14 +124,6 @@ class ResetPassword extends Component {
       </div>
     )
   }
-}
-
-ResetPassword.propTypes = {
-  form: PropTypes.object,
-  id: PropTypes.string,
-  submitForm: PropTypes.func,
-  ResetPassword: PropTypes.object,
-  loading: PropTypes.bool
 }
 
 export default Form.create()(ResetPassword)

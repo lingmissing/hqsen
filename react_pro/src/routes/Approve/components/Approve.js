@@ -6,6 +6,25 @@ import MyCard from 'components//MyCard'
 import './Approve.scss'
 
 class Approve extends Component {
+  static propTypes = {
+    Approve: PropTypes.object,
+    form: PropTypes.object,
+    basicInfo: PropTypes.object,
+    configData: PropTypes.object,
+    formData: PropTypes.object,
+    getInit: PropTypes.func,
+    type: PropTypes.string,
+    id: PropTypes.string,
+    params: PropTypes.object,
+    query: PropTypes.object,
+    location: PropTypes.object,
+    submitForm: PropTypes.func,
+    clearData: PropTypes.func
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
   constructor () {
     super()
     this.state = {
@@ -35,13 +54,16 @@ class Approve extends Component {
     })
   }
   cancleSubmit () {
-    const { type } = this.props.params
-    this.context.router.push(`list/${type}`)
+    // const { type } = this.props.params
+    // this.context.router.push(`list/${type}`)
+    this.context.router.goBack()
   }
 
   render () {
-    const { getFieldDecorator } = this.props.form
-    const { basicInfo, formData, loading, dataSource } = this.props.Approve
+    const {
+      form: { getFieldDecorator },
+      Approve: { basicInfo, formData, loading, dataSource }
+    } = this.props
     return (
       <div className="approve-page">
         <MyBreadcrumb breadcrumb={basicInfo.breadcrumb} />
@@ -86,27 +108,6 @@ class Approve extends Component {
       </div>
     )
   }
-}
-
-Approve.propTypes = {
-  Approve: PropTypes.object,
-  form: PropTypes.object,
-  basicInfo: PropTypes.object,
-  configData: PropTypes.object,
-  formData: PropTypes.object,
-  getInit: PropTypes.func,
-  type: PropTypes.string,
-  id: PropTypes.string,
-  params: PropTypes.object,
-  query: PropTypes.object,
-  location: PropTypes.object,
-  submitForm: PropTypes.func,
-  clearData: PropTypes.func
-}
-
-
-Approve.contextTypes = {
-  router: React.PropTypes.object.isRequired
 }
 
 export default Form.create()(Approve)

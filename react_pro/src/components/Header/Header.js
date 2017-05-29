@@ -4,6 +4,16 @@ import './Header.scss'
 const SubMenu = Menu.SubMenu
 
 class Header extends Component {
+  static propTypes = {
+    headKey: PropTypes.string,
+    saveHeadKey: PropTypes.func,
+    menu: PropTypes.array,
+    router: PropTypes.object
+  }
+
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
   handleClick (e) {
     console.log(e.key)
     this.props.saveHeadKey(e.key)
@@ -58,17 +68,6 @@ class Header extends Component {
       </Row>
     )
   }
-}
-
-Header.propTypes = {
-  headKey: PropTypes.string,
-  saveHeadKey: PropTypes.func,
-  menu: PropTypes.array,
-  router: PropTypes.object
-}
-
-Header.contextTypes = {
-  router: PropTypes.object.isRequired
 }
 
 export default Header

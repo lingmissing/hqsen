@@ -5,6 +5,27 @@ import MyBreadcrumb from '../../../components/MyBreadcrumb'
 const Search = Input.Search
 
 class List extends Component {
+  static propTypes = {
+    disabledRow: PropTypes.func,
+    payCompleted: PropTypes.func,
+    configData: PropTypes.object,
+    deleteRow: PropTypes.func,
+    initData: PropTypes.func,
+    changeSearchInput: PropTypes.func,
+    handleCurrentChange: PropTypes.func,
+    setBasicInfo: PropTypes.func,
+    List: PropTypes.object,
+    breadcrumb: PropTypes.array,
+    dataSource: PropTypes.array,
+    columns: PropTypes.array,
+    params: PropTypes.object,
+    type: PropTypes.string
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -53,8 +74,15 @@ class List extends Component {
     }
   }
   render () {
-    const { pageInfo, resultInfo, searchInput, loading, basicInfo } = this.props.List
-    const { handleCurrentChange, changeSearchInput, deleteRow, configData, disabledRow, payCompleted } = this.props
+    const {
+      List: { pageInfo, resultInfo, searchInput, loading, basicInfo },
+      handleCurrentChange,
+      changeSearchInput,
+      deleteRow,
+      configData,
+      disabledRow,
+      payCompleted
+    } = this.props
     const columns = {
       // 客资信息
       order_info_kezi_list: [{
@@ -91,6 +119,7 @@ class List extends Component {
           return (
             <Button
               type="default"
+              size="small"
               onClick={() => this.gotoDetail(id)}>查看详情</Button>
           )
         }
@@ -659,27 +688,6 @@ class List extends Component {
       </div>
     )
   }
-}
-
-List.propTypes = {
-  disabledRow: PropTypes.func,
-  payCompleted: PropTypes.func,
-  configData: PropTypes.object,
-  deleteRow: PropTypes.func,
-  initData: PropTypes.func,
-  changeSearchInput: PropTypes.func,
-  handleCurrentChange: PropTypes.func,
-  setBasicInfo: PropTypes.func,
-  List: PropTypes.object,
-  breadcrumb: PropTypes.array,
-  dataSource: PropTypes.array,
-  columns: PropTypes.array,
-  params: PropTypes.object,
-  type: PropTypes.string
-}
-
-List.contextTypes = {
-  router: React.PropTypes.object.isRequired
 }
 
 export default List
