@@ -30,11 +30,12 @@ class Approve extends Component {
     this.state = {
       isSubmit: undefined
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.cancleSubmit = this.cancleSubmit.bind(this)
   }
 
   componentWillMount () {
-    const { type } = this.props.params
-    const { id, isSubmit } = this.props.location.query
+    const { params: { type }, location: { query: { id, isSubmit } } } = this.props
     this.setState({ isSubmit })
     this.props.getInit(type, id)
   }
@@ -54,8 +55,6 @@ class Approve extends Component {
     })
   }
   cancleSubmit () {
-    // const { type } = this.props.params
-    // this.context.router.push(`list/${type}`)
     this.context.router.goBack()
   }
 
@@ -94,11 +93,11 @@ class Approve extends Component {
                 }
               </div>
               <Form.Item>
-                <Popconfirm title="确认提交?" onConfirm={(e) => this.handleSubmit(e)}>
+                <Popconfirm title="确认提交?" onConfirm={this.handleSubmit}>
                   <Button className="approve-btn" type="primary" loading={loading}>提交</Button>
                 </Popconfirm>
                 <Button className="approve-btn"
-                  type="default" size="default" onClick={() => this.cancleSubmit()}>取消</Button>
+                  type="default" size="default" onClick={this.cancleSubmit}>取消</Button>
               </Form.Item>
             </div>}
           </Form>

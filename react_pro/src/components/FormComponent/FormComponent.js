@@ -11,7 +11,8 @@ class FormComponent extends Component {
     dataSource: PropTypes.array,
     item: PropTypes.object,
     getFieldDecorator: PropTypes.func,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    defaultValue: PropTypes.any
   }
   handleChange (e) {
     const { item: { name }, onChange } = this.props
@@ -36,7 +37,7 @@ class FormComponent extends Component {
         return (
           <RadioGroup
             disabled={item.disabled}
-            onChange={(e) => this.handleChange(e)}>
+            onChange={e => this.handleChange(e)}>
             {dataSource.map(option =>
               <Radio key={option.value} value={option.value}>{option.label}</Radio>)}
           </RadioGroup>
@@ -45,7 +46,7 @@ class FormComponent extends Component {
         return <CheckboxGroup
           options={dataSource}
           disabled={item.disabled}
-          onChange={(e) => this.handleChange(e)} />
+          onChange={e => this.handleChange(e)} />
       case 'image':
         return <ImageView data={dataSource} />
       default:
@@ -53,7 +54,7 @@ class FormComponent extends Component {
           type={item.type || 'text'}
           placeholder={item.placeholder}
           disabled={item.disabled}
-          onChange={(e) => this.handleChange(e)} />
+          onChange={e => this.handleChange(e)} />
     }
   }
   render () {
@@ -69,7 +70,6 @@ class FormComponent extends Component {
         sm: { span: 14 }
       }
     }
-    item.status = item.status || ''
     if (item.hide) {
       return null
     } else {

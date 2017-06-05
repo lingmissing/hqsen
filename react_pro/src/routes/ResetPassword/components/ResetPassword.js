@@ -24,6 +24,8 @@ class ResetPassword extends Component {
     this.handleConfirmBlur = this.handleConfirmBlur.bind(this)
     this.checkConfirm = this.checkConfirm.bind(this)
     this.checkPassword = this.checkPassword.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.cancleSubmit = this.cancleSubmit.bind(this)
   }
   handleConfirmBlur (e) {
     const value = e.target.value
@@ -115,10 +117,10 @@ class ResetPassword extends Component {
             )}
           </FormItem>
           <FormItem>
-            <Popconfirm title="确认提交?" onConfirm={(e) => this.handleSubmit(e)}>
+            <Popconfirm title="确认提交?" onConfirm={this.handleSubmit}>
               <Button className="add-btn" type="primary" loading={loading}>提交</Button>
             </Popconfirm>
-            <Button className="add-btn" type="default" size="default" onClick={() => this.cancleSubmit()}>取消</Button>
+            <Button className="add-btn" type="default" size="default" onClick={this.cancleSubmit}>取消</Button>
           </FormItem>
         </Form>
       </div>

@@ -4,6 +4,7 @@ import MyBreadcrumb from 'components/MyBreadcrumb'
 import FormComponent from 'components/FormComponent'
 import ConfirmComponent from './ConfirmComponent'
 import './Add.scss'
+
 class Add extends Component {
   static propTypes = {
     Add: PropTypes.object,
@@ -32,6 +33,8 @@ class Add extends Component {
       showArea: false
     }
     this.handleChange = this.handleChange.bind(this)
+    this.cancleSubmit = this.cancleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentWillMount () {
@@ -60,14 +63,9 @@ class Add extends Component {
     })
   }
   cancleSubmit () {
-    // const { type } = this.props.params
-    // if (type !== 'remittance_info_remittance_ratio') {
-    //   this.context.router.push(`list/${type}`)
-    // }
     this.context.router.goBack()
   }
   handleChange (name, value) {
-    console.log(name, value)
     if (name === 'user_type') {
       if (value === '11' || value === '12') {
         this.props.toggleAreaSelect(false)
@@ -78,8 +76,10 @@ class Add extends Component {
   }
 
   render () {
-    const { getFieldDecorator } = this.props.form
-    const { basicInfo, dataSource, formData, loading } = this.props.Add
+    const {
+      form: { getFieldDecorator },
+      Add: { basicInfo, dataSource, formData, loading }
+    } = this.props
     let configData = { ...this.props.configData, ...dataSource }
     if (basicInfo.type === 'account_info_inner_list') {
       // configData.area_id = configData.config_area
@@ -103,10 +103,10 @@ class Add extends Component {
           }
           { this.state.showConfirm && basicInfo.type && <ConfirmComponent form={this.props.form} id={basicInfo.id} />}
           <Form.Item>
-            <Popconfirm title="确认提交?" onConfirm={(e) => this.handleSubmit(e)}>
+            <Popconfirm title="确认提交?" onConfirm={this.handleSubmit}>
               <Button className="add-btn" type="primary" loading={loading}>提交</Button>
             </Popconfirm>
-            <Button className="add-btn" type="default" size="default" onClick={() => this.cancleSubmit()}>取消</Button>
+            <Button className="add-btn" type="default" size="default" onClick={this.cancleSubmit}>取消</Button>
           </Form.Item>
         </Form>
       </div>

@@ -35,17 +35,16 @@ class List extends Component {
   }
 
   componentWillMount () {
-    const { type } = this.props.params
-    const { setBasicInfo, handleCurrentChange } = this.props
+    const { setBasicInfo, handleCurrentChange, params: { type } } = this.props
     setBasicInfo(type)
     handleCurrentChange(1)
   }
 
   componentWillReceiveProps (nextProps) {
+    const { List: { basicInfo }, initData } = this.props
     const type = nextProps.params.type
-    const { basicInfo } = this.props.List
     if (type !== basicInfo.type) {
-      this.props.initData(type)
+      initData(type)
     }
   }
   goApproveDetail (id, isSubmit) {
