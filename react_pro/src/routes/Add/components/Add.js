@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { Form, Button, Popconfirm } from 'antd'
+import { Form, Button, Popconfirm, Tabs } from 'antd'
 import MyBreadcrumb from 'components/MyBreadcrumb'
 import FormComponent from 'components/FormComponent'
 import ConfirmComponent from './ConfirmComponent'
 import './Add.scss'
+const TabPane = Tabs.TabPane
 
 class Add extends Component {
   static propTypes = {
@@ -35,6 +36,7 @@ class Add extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.cancleSubmit = this.cancleSubmit.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.callback = this.callback.bind(this)
   }
 
   componentWillMount () {
@@ -74,6 +76,10 @@ class Add extends Component {
       }
     }
   }
+  callback (key) {
+    console.log(key)
+    this.context.router.push(`/add/${key}`)
+  }
 
   render () {
     const {
@@ -90,6 +96,13 @@ class Add extends Component {
     return (
       <div className="add-page">
         <MyBreadcrumb breadcrumb={basicInfo.breadcrumb} />
+        <div className="tabs-box">
+          <Tabs className="add-tabs" defaultActiveKey="hotel_info_hotel_list" size="small" onChange={this.callback}>
+            <TabPane tab="基础信息" key="hotel_info_hotel_list" />
+            <TabPane tab="详细设定" key="hotel_info_hotel_lis" />
+            <TabPane tab="宴会厅设置" key="hotel_info_hotel_lit" />
+          </Tabs>
+        </div>
         <Form className="vertival-form">
           { basicInfo.formList.map((item, index) => {
             return <FormComponent

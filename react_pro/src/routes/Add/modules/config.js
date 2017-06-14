@@ -27,6 +27,82 @@ export default {
     }],
     breadcrumb: ['基础信息设定', '酒店信息', '新增酒店']
   },
+  // 详细设定
+  hotel_info_hotel_lis: {
+    detailUrlKey: 'hotelDetail',
+    editUrlKey: 'editHotel',
+    createUrlKey: 'createHotel',
+    formList: [{
+      label: '酒店价位',
+      type: 'text',
+      name: 'hotel_nam22e',
+      rules: { required: true }
+    }, {
+      label: '酒店最大容纳桌数',
+      type: 'text',
+      name: 'hotel_name',
+      rules: { required: true }
+    }, {
+      label: '酒店联系电话',
+      type: 'text',
+      name: 'hotel_name',
+      rules: { required: true }
+    }, {
+      label: '酒店介绍图片',
+      type: 'upload',
+      name: 'hotel_name',
+      rules: { required: true }
+    }, {
+      label: '婚宴菜单',
+      type: 'wedding',
+      name: 'area_id',
+      rules: { required: true }
+    }],
+    breadcrumb: ['基础信息设定', '酒店信息', '新增酒店']
+  },
+  // 婚宴菜单
+  hotel_info_hotel_lisww: {
+    detailUrlKey: 'hotelDetail',
+    editUrlKey: 'editHotel',
+    createUrlKey: 'createHotel',
+    formList: [{
+      label: '宴会厅名称',
+      type: 'text',
+      name: 'hotel_nam22e',
+      rules: { required: true }
+    }, {
+      label: '最大容纳桌数',
+      type: 'text',
+      name: 'hotel_name',
+      rules: { required: true }
+    }, {
+      label: '最少容纳桌数',
+      type: 'text',
+      name: 'hotel_name',
+      rules: { required: true }
+    }, {
+      label: '最佳容纳桌数',
+      type: 'text',
+      name: 'hotel_name',
+      rules: { required: true }
+    }, {
+      label: '宴会厅面积',
+      type: 'text',
+      name: 'hotel_name',
+      rules: { required: true }
+    }, {
+      label: '宴会厅立柱数',
+      type: 'text',
+      name: 'hotel_name',
+      rules: { required: true }
+    }, {
+      label: '酒店介绍图片',
+      type: 'upload',
+      name: 'hotel_name',
+      rules: { required: true }
+    }],
+    breadcrumb: ['基础信息设定', '酒店信息', '新增酒店']
+  },
   // 区域
   hotel_info_area_list: {
     detailUrlKey: 'areaDetail',

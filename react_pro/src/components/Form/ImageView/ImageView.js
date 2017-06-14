@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import './ImageView.scss'
-import ViewImage from '../ViewImage'
+import ViewImage from '../../ViewImage'
 
 class ImageView extends Component {
   static propTypes = {

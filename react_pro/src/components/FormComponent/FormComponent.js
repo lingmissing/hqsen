@@ -1,7 +1,9 @@
 import { Form, Input, Select, Radio, Checkbox } from 'antd'
 import React, { Component, PropTypes } from 'react'
 import checkList from './checkList'
-import ImageView from '../ImageView'
+import ImageView from '../Form/ImageView'
+import UploadImage from '../Form/UploadImage'
+import WeddingMenu from '../Form/WeddingMenu'
 const CheckboxGroup = Checkbox.Group
 const RadioGroup = Radio.Group
 const Option = Select.Option
@@ -49,6 +51,10 @@ class FormComponent extends Component {
           onChange={e => this.handleChange(e)} />
       case 'image':
         return <ImageView data={dataSource} />
+      case 'upload':
+        return <UploadImage />
+      case 'wedding':
+        return <WeddingMenu />
       default:
         return <Input
           type={item.type || 'text'}
