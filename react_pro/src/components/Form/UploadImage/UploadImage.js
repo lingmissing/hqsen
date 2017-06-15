@@ -15,6 +15,7 @@ class UploadImage extends Component {
     })
   }
   render () {
+    // const { setFieldsValue } = this.props
     const props = {
       name: 'file',
       action: '//jsonplaceholder.typicode.com/posts/',

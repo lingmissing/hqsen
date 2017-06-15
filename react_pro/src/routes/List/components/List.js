@@ -47,6 +47,7 @@ class List extends Component {
       initData(type)
     }
   }
+
   goApproveDetail (id, isSubmit) {
     const { type } = this.props.params
     this.context.router.push(`/approve/${type}?id=${id}&isSubmit=${isSubmit}`)
@@ -72,6 +73,20 @@ class List extends Component {
       return 'disabled-row'
     }
   }
+
+  getStatus (text) {
+    switch (text) {
+      case '0':
+        return '未知'
+      case '1':
+        return '未处理'
+      case '2':
+        return '通过'
+      case '3':
+        return '驳回'
+    }
+  }
+
   render () {
     const {
       List: { pageInfo, resultInfo, searchInput, loading, basicInfo },
@@ -310,21 +325,7 @@ class List extends Component {
         dataIndex: 'sign_status',
         title: '状态',
         render: text => {
-          let data = ''
-          switch (text) {
-            case '0':
-              data = '未知'
-              break
-            case '1':
-              data = '未处理'
-              break
-            case '2':
-              data = '通过'
-              break
-            case '3':
-              data = '驳回'
-              break
-          }
+          let data = this.getStatus(text)
           return <span>{data}</span>
         }
       }, {
@@ -382,21 +383,7 @@ class List extends Component {
         dataIndex: 'sign_status',
         title: '状态',
         render: text => {
-          let data = ''
-          switch (text) {
-            case '0':
-              data = '未知'
-              break
-            case '1':
-              data = '未处理'
-              break
-            case '2':
-              data = '通过'
-              break
-            case '3':
-              data = '驳回'
-              break
-          }
+          let data = this.getStatus(text)
           return <span>{data}</span>
         }
       }, {
@@ -428,21 +415,7 @@ class List extends Component {
         dataIndex: 'boss_sign_status',
         title: '状态',
         render: text => {
-          let data = ''
-          switch (text) {
-            case '0':
-              data = '未知'
-              break
-            case '1':
-              data = '未处理'
-              break
-            case '2':
-              data = '通过'
-              break
-            case '3':
-              data = '驳回'
-              break
-          }
+          let data = this.getStatus(text)
           return <span>{data}</span>
         }
       }, {
@@ -500,21 +473,7 @@ class List extends Component {
         dataIndex: 'boss_sign_status',
         title: '状态',
         render: text => {
-          let data = ''
-          switch (text) {
-            case '0':
-              data = '未知'
-              break
-            case '1':
-              data = '未处理'
-              break
-            case '2':
-              data = '通过'
-              break
-            case '3':
-              data = '驳回'
-              break
-          }
+          let data = this.getStatus(text)
           return <span>{data}</span>
         }
       }, {
@@ -589,6 +548,45 @@ class List extends Component {
         dataIndex: 'pay_status',
         title: '状态',
         render: text => <span>{text === '4' ? '已打款' : '待打款'}</span>
+      }, {
+        key: 'control',
+        dataIndex: 'control',
+        title: '操作',
+        render: (text, record) => renderPayControl(record)
+      }],
+      // 宴会厅设置
+      remittance_info_dajian_contract11: [{
+        key: 'id',
+        dataIndex: 'id',
+        title: '序号'
+      }, {
+        key: 'order_money',
+        dataIndex: 'order_money',
+        title: '宴会厅名称'
+      }, {
+        key: 'first_order_money',
+        dataIndex: 'first_order_money',
+        title: '图片数'
+      }, {
+        key: 'create_user_name',
+        dataIndex: 'create_user_name',
+        title: '最大桌数'
+      }, {
+        key: 'create_user_money',
+        dataIndex: 'create_user_money',
+        title: '最小桌数'
+      }, {
+        key: 'pay_status',
+        dataIndex: 'pay_status',
+        title: '最佳桌数'
+      }, {
+        key: 'pay_status',
+        dataIndex: 'pay_status',
+        title: '立柱数'
+      }, {
+        key: 'pay_status',
+        dataIndex: 'pay_status',
+        title: '面积'
       }, {
         key: 'control',
         dataIndex: 'control',

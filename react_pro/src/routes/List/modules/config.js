@@ -90,5 +90,11 @@ export default {
     listUrlKey: 'feedback',
     uniqueKey: 'id',
     breadcrumb: ['意见反馈列表']
+  },
+  // 宴会厅设置
+  order_info_dajian_list11: {
+    listUrlKey: 'dajianList',
+    uniqueKey: 'order_id',
+    breadcrumb: ['酒店列表', '新增酒店']
   }
 }

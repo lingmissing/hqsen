@@ -24,6 +24,7 @@ class WeddingMenu extends Component {
         this.setState({
           wedingList: [...wedingList, { name: name, price: price }]
         })
+        // setFieldsValue({})
         this.cancleWeddingMenu()
       }
     } else {
@@ -48,6 +49,7 @@ class WeddingMenu extends Component {
     })
   }
   removeWeddingItem (name) {
+    // const { setFieldsValue } = this.props
     this.setState({
       wedingList: this.state.wedingList.filter(item => item.name !== name)
     })

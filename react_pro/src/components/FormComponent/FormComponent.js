@@ -13,6 +13,7 @@ class FormComponent extends Component {
     dataSource: PropTypes.array,
     item: PropTypes.object,
     getFieldDecorator: PropTypes.func,
+    setFieldsValue: PropTypes.func,
     onChange: PropTypes.func,
     defaultValue: PropTypes.any
   }
@@ -21,7 +22,7 @@ class FormComponent extends Component {
     onChange && onChange(name, e)
   }
   renderComponent () {
-    const { item, dataSource } = this.props
+    const { item, dataSource, setFieldsValue } = this.props
     switch (item.type) {
       case 'select':
         return (
@@ -52,9 +53,9 @@ class FormComponent extends Component {
       case 'image':
         return <ImageView data={dataSource} />
       case 'upload':
-        return <UploadImage />
+        return <UploadImage setFieldsValue={setFieldsValue} />
       case 'wedding':
-        return <WeddingMenu />
+        return <WeddingMenu setFieldsValue={setFieldsValue} />
       default:
         return <Input
           type={item.type || 'text'}

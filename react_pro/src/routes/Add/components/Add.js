@@ -83,7 +83,7 @@ class Add extends Component {
 
   render () {
     const {
-      form: { getFieldDecorator },
+      form: { getFieldDecorator, setFieldsValue },
       Add: { basicInfo, dataSource, formData, loading }
     } = this.props
     let configData = { ...this.props.configData, ...dataSource }
@@ -108,6 +108,7 @@ class Add extends Component {
             return <FormComponent
               key={index}
               getFieldDecorator={getFieldDecorator}
+              setFieldsValue={setFieldsValue}
               item={item}
               onChange={this.handleChange}
               dataSource={configData[item.name]}
