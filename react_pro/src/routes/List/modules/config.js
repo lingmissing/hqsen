@@ -92,9 +92,17 @@ export default {
     breadcrumb: ['意见反馈列表']
   },
   // 宴会厅设置
-  order_info_dajian_list11: {
-    listUrlKey: 'dajianList',
-    uniqueKey: 'order_id',
-    breadcrumb: ['酒店列表', '新增酒店']
+  wedding_list: {
+    deleteUrlKey: 'hotelRoomDelete',
+    listUrlKey: 'hotelRoomList',
+    uniqueKey: 'id',
+    breadcrumb: ['酒店列表', '宴会厅设置']
+  },
+  // 首页推荐配置
+  hotel_rec_list: {
+    deleteUrlKey: 'hotelRecDelete',
+    listUrlKey: 'hotelRecList',
+    uniqueKey: 'id',
+    breadcrumb: ['酒店列表', '宴会厅设置']
   }
 }

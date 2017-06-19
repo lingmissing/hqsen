@@ -15,14 +15,15 @@ class FormComponent extends Component {
     getFieldDecorator: PropTypes.func,
     setFieldsValue: PropTypes.func,
     onChange: PropTypes.func,
-    defaultValue: PropTypes.any
+    defaultValue: PropTypes.any,
+    id: PropTypes.string
   }
   handleChange (e) {
     const { item: { name }, onChange } = this.props
     onChange && onChange(name, e)
   }
   renderComponent () {
-    const { item, dataSource, setFieldsValue } = this.props
+    const { item, dataSource, setFieldsValue, id } = this.props
     switch (item.type) {
       case 'select':
         return (
@@ -30,38 +31,35 @@ class FormComponent extends Component {
             placeholder={item.placeholder}
             disabled={item.disabled}
             allowClear
-            onChange={(e) => this.handleChange(e)}>
+            onChange={e => this.handleChange(e)}
+          >
             {dataSource &&
-              dataSource.map(option =>
-                <Option key={option.value} value={option.value}>{option.label}</Option>)}
+              dataSource.map(option => <Option key={option.value} value={option.value}>{option.label}</Option>)}
           </Select>
         )
       case 'radio':
         return (
-          <RadioGroup
-            disabled={item.disabled}
-            onChange={e => this.handleChange(e)}>
-            {dataSource.map(option =>
-              <Radio key={option.value} value={option.value}>{option.label}</Radio>)}
+          <RadioGroup disabled={item.disabled} onChange={e => this.handleChange(e)}>
+            {dataSource.map(option => <Radio key={option.value} value={option.value}>{option.label}</Radio>)}
           </RadioGroup>
         )
       case 'checkbox':
-        return <CheckboxGroup
-          options={dataSource}
-          disabled={item.disabled}
-          onChange={e => this.handleChange(e)} />
+        return <CheckboxGroup options={dataSource} disabled={item.disabled} onChange={e => this.handleChange(e)} />
       case 'image':
         return <ImageView data={dataSource} />
       case 'upload':
         return <UploadImage setFieldsValue={setFieldsValue} />
       case 'wedding':
-        return <WeddingMenu setFieldsValue={setFieldsValue} />
+        return <WeddingMenu hoteId={id} />
       default:
-        return <Input
-          type={item.type || 'text'}
-          placeholder={item.placeholder}
-          disabled={item.disabled}
-          onChange={e => this.handleChange(e)} />
+        return (
+          <Input
+            type={item.type || 'text'}
+            placeholder={item.placeholder}
+            disabled={item.disabled}
+            onChange={e => this.handleChange(e)}
+          />
+        )
     }
   }
   render () {
@@ -79,15 +77,23 @@ class FormComponent extends Component {
     }
     if (item.hide) {
       return null
-    } else {
+    } else if (item.type === 'upload') {
       return (
-        <Form.Item label={item.label} {...formItemLayout} >
+        <Form.Item label={item.label} {...formItemLayout}>
           {getFieldDecorator(item.name, {
             initialValue: defaultValue,
             rules: ruleList
-          })(
-            this.renderComponent()
-          )}
+          })(<Input />)}
+          {this.renderComponent()}
+        </Form.Item>
+      )
+    } else {
+      return (
+        <Form.Item label={item.label} {...formItemLayout}>
+          {getFieldDecorator(item.name, {
+            initialValue: defaultValue,
+            rules: ruleList
+          })(this.renderComponent())}
         </Form.Item>
       )
     }

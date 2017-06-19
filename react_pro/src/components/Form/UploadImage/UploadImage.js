@@ -1,8 +1,14 @@
 import React, { Component, PropTypes } from 'react'
-import { Upload, message, Button, Icon } from 'antd'
+import { message, Button, Icon } from 'antd'
+import axios from 'axios'
+import { domain, urlKey } from 'root/Fetch'
+import ViewImage from '../../ViewImage'
 import './UploadImage.scss'
 
 class UploadImage extends Component {
+  static propTypes = {
+    setFieldsValue: PropTypes.func
+  }
   constructor (props) {
     super(props)
     this.state = {
@@ -10,48 +16,57 @@ class UploadImage extends Component {
     }
   }
   removeImage (name) {
+    const uploadList = this.state.uploadList.filter(item => item.name !== name)
     this.setState({
-      uploadList: this.state.uploadList.filter(item => item.name !== name)
+      uploadList
+    })
+    this.props.setFieldsValue({
+      nnn: JSON.stringify(uploadList)
     })
   }
+  uploadImage (e) {
+    const { setFieldsValue } = this.props
+    const file = e.target.files[0]
+    const data = new FormData()
+    data.append('file', file)
+    axios
+      .post(`${domain}${urlKey.uploadPic}`, data)
+      .then(response => response.data)
+      .then(response => {
+        const uploadList = [...this.state.uploadList, response.data.url]
+        this.setState({
+          uploadList
+        })
+        console.log(JSON.stringify(uploadList))
+        setFieldsValue({
+          hotel_image: JSON.stringify(uploadList)
+        })
+      })
+      .catch(error => {
+        message.error(error)
+      })
+  }
   render () {
-    // const { setFieldsValue } = this.props
-    const props = {
-      name: 'file',
-      action: '//jsonplaceholder.typicode.com/posts/',
-      headers: {
-        authorization: 'authorization-text'
-      },
-      onChange (info) {
-        if (info.file.status !== 'uploading') {
-          console.log(info.file, info.fileList)
-        }
-        if (info.file.status === 'done') {
-          message.success(`${info.file.name} file uploaded successfully`)
-        } else if (info.file.status === 'error') {
-          message.error(`${info.file.name} file upload failed.`)
-        }
-      }
-    }
     return (
       <div className="uploa-image-box">
-        <Upload {...props} className="upload-btn">
-          <Button size="small">
-            <Icon type="upload" /> 上传图片
-          </Button>
-        </Upload>
+        <div className="upload-btn-box">
+          <Button icon="upload">上传图片</Button>
+          <input type="file" accept="image/jpg,image/jpeg,image/png,image/gif" onChange={e => this.uploadImage(e)} />
+        </div>
         <ul className="upload-list">
-          <li className="upload-item">
-            <Icon className="upload-close" type="close" onClick={() => this.removeImage()} />
-            <img className="upload-image" src="aa.kpg" />
-          </li>
+          {this.state.uploadList.map((item, index) =>
+            <li key={index} className="upload-item">
+              <Icon className="upload-close" type="close" onClick={() => this.removeImage()} />
+              <img className="upload-image" onClick={() => ViewImage({ source: item })} src={item} />
+            </li>
+          )}
+
         </ul>
       </div>
     )
   }
 }
 
-UploadImage.propTypes = {
-}
+UploadImage.propTypes = {}
 
 export default UploadImage
