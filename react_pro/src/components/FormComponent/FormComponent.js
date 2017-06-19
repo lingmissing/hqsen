@@ -23,7 +23,7 @@ class FormComponent extends Component {
     onChange && onChange(name, e)
   }
   renderComponent () {
-    const { item, dataSource, setFieldsValue, id } = this.props
+    const { item, dataSource, setFieldsValue, id, defaultValue } = this.props
     switch (item.type) {
       case 'select':
         return (
@@ -48,7 +48,7 @@ class FormComponent extends Component {
       case 'image':
         return <ImageView data={dataSource} />
       case 'upload':
-        return <UploadImage setFieldsValue={setFieldsValue} />
+        return <UploadImage config={item} setFieldsValue={setFieldsValue} defaultValue={defaultValue} />
       case 'wedding':
         return <WeddingMenu hoteId={id} />
       default:
@@ -83,7 +83,7 @@ class FormComponent extends Component {
           {getFieldDecorator(item.name, {
             initialValue: defaultValue,
             rules: ruleList
-          })(<Input />)}
+          })(<Input style={{ display: 'none' }} />)}
           {this.renderComponent()}
         </Form.Item>
       )

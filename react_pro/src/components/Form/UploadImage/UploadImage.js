@@ -7,25 +7,42 @@ import './UploadImage.scss'
 
 class UploadImage extends Component {
   static propTypes = {
-    setFieldsValue: PropTypes.func
+    setFieldsValue: PropTypes.func,
+    defaultValue: PropTypes.string,
+    config: PropTypes.object
   }
+
   constructor (props) {
     super(props)
     this.state = {
-      uploadList: []
+      uploadList: [],
+      isInitList: false
     }
   }
+
+  componentWillReceiveProps (nextProps) {
+    if (!this.state.isInitList) {
+      if (nextProps.defaultValue) {
+        this.setState({
+          uploadList: JSON.parse(nextProps.defaultValue),
+          isInitList: true
+        })
+      }
+    }
+  }
+
   removeImage (name) {
+    const { config } = this.props
     const uploadList = this.state.uploadList.filter(item => item.name !== name)
     this.setState({
       uploadList
     })
     this.props.setFieldsValue({
-      nnn: JSON.stringify(uploadList)
+      [config.name]: JSON.stringify(uploadList)
     })
   }
   uploadImage (e) {
-    const { setFieldsValue } = this.props
+    const { setFieldsValue, config } = this.props
     const file = e.target.files[0]
     const data = new FormData()
     data.append('file', file)
@@ -37,9 +54,8 @@ class UploadImage extends Component {
         this.setState({
           uploadList
         })
-        console.log(JSON.stringify(uploadList))
         setFieldsValue({
-          hotel_image: JSON.stringify(uploadList)
+          [config.name]: JSON.stringify(uploadList)
         })
       })
       .catch(error => {
