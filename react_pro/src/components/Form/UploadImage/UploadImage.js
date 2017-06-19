@@ -23,11 +23,20 @@ class UploadImage extends Component {
   componentWillReceiveProps (nextProps) {
     if (!this.state.isInitList) {
       if (nextProps.defaultValue) {
+        const isJson = this.isJSON(nextProps.defaultValue)
         this.setState({
-          uploadList: JSON.parse(nextProps.defaultValue),
+          uploadList: isJson ? JSON.parse(nextProps.defaultValue) : [],
           isInitList: true
         })
       }
+    }
+  }
+  isJSON (str) {
+    try {
+      JSON.parse(str)
+      return true
+    } catch (e) {
+      return false
     }
   }
 
