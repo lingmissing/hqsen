@@ -23,26 +23,30 @@ class UploadImage extends Component {
   componentWillReceiveProps (nextProps) {
     if (!this.state.isInitList) {
       if (nextProps.defaultValue) {
-        const isJson = this.isJSON(nextProps.defaultValue)
+        const isJsonArr = this.isJsonArr(nextProps.defaultValue)
         this.setState({
-          uploadList: isJson ? JSON.parse(nextProps.defaultValue) : [],
+          uploadList: isJsonArr ? JSON.parse(nextProps.defaultValue) : [],
           isInitList: true
         })
       }
     }
   }
-  isJSON (str) {
+  isJsonArr (str) {
     try {
-      JSON.parse(str)
-      return true
+      const data = JSON.parse(str)
+      if (data instanceof Array) {
+        return true
+      } else {
+        throw new Error('not arr')
+      }
     } catch (e) {
       return false
     }
   }
 
-  removeImage (name) {
+  removeImage (url) {
     const { config } = this.props
-    const uploadList = this.state.uploadList.filter(item => item.name !== name)
+    const uploadList = this.state.uploadList.filter(item => item !== url)
     this.setState({
       uploadList
     })
@@ -81,7 +85,7 @@ class UploadImage extends Component {
         <ul className="upload-list">
           {this.state.uploadList.map((item, index) =>
             <li key={index} className="upload-item">
-              <Icon className="upload-close" type="close" onClick={() => this.removeImage()} />
+              <Icon className="upload-close" type="close" onClick={() => this.removeImage(item)} />
               <img className="upload-image" onClick={() => ViewImage({ source: item })} src={item} />
             </li>
           )}
