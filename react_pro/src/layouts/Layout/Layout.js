@@ -38,8 +38,8 @@ class Layout extends Component {
           },
           error => {
             if (error === '登录失效请重新登录') {
-              this.context.router.push('/login')
               this.setState({ usableToken: false })
+              this.context.router.push('/login')
             }
           }
         )
