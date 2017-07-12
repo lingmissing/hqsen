@@ -44,6 +44,7 @@ class Layout extends Component {
           }
         )
       } else {
+        this.setState({ usableToken: false })
         this.context.router.push('/login')
       }
     }
