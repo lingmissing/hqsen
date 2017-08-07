@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+html,
+body {
+  height: 100%;
+  background: url('http://pic2.ooopic.com/10/91/56/03b1OOOPICd7.jpg') no-repeat
+    center;
+  background-size: cover;
+  overflow: hidden;
+
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -ms-filter: blur(10px);
+  -o-filter: blur(10px);
+}
+.content-wrapper {
+  height: 100%;
+  overflow: hidden;
+  padding: 40px 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  /* background-color: #000; */
+}
+.content-logo {
+  display: block;
+  margin: 0 auto;
+  width: 80px;
+  height: 80px;
+  background: url(./logo.png) no-repeat center;
+  background-size: 100%;
+}
+.download-content {
+}
+.download-list {
+  display: flex;
+  width: 440px;
+  margin: 0 auto;
+}
+.download-item {
+  width: 220px;
+  padding: 0 10px;
+}
+.download-item img {
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+.download-item .download-desc {
+}
