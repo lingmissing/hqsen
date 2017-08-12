@@ -299,12 +299,6 @@ export default {
     breadcrumb: ['财务审批', '搭建审核列表（尾款时间）', '财务审批'],
     formList: [
       {
-        label: '合同金额',
-        type: 'text',
-        name: 'other_item_order_money',
-        disabled: true
-      },
-      {
         label: '原举办时间',
         type: 'date',
         name: 'other_item_weikuan_old_time',
