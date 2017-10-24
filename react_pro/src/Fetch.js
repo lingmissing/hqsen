@@ -7,7 +7,7 @@ export let domain = ''
 if (window.location.origin.indexOf('51isen') > -1) {
   domain = `${origin}/index.php?m=web&`
 } else {
-  domain = `http://web.51isen.com/index.php?m=web&`
+  domain = `http://dev.51isen.com/index.php?m=web&`
 }
 
 export const urlKey = {
@@ -27,7 +27,7 @@ export const urlKey = {
   hotelMenuCreate: 'c=hotel&f=hotelMenuCreate',
   hotelMenuDelete: 'c=hotel&f=hotelMenuDelete',
   uploadPic: 'c=user&f=uploadPic',
-  getAsyncHotel: '',
+  getAsyncHotel: 'c=kezi&f=getSyncDetail',
   // 宴会厅
   hotelRoomList: 'c=hotel&f=hotelRoomList',
   hotelRoomCreate: 'c=hotel&f=hotelRoomCreate',

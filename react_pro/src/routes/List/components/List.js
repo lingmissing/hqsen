@@ -206,11 +206,12 @@ class List extends Component {
   showAsync (id) {
     Fetch('getAsyncHotel', { id }).then(
       response => {
+        console.log(response)
         Modal.success({
           title: '已同步到以下酒店',
           className: 'async-hotel',
           okText: '关闭',
-          content: response.data
+          content: response.data.hotel_names
         })
       },
       () => {
