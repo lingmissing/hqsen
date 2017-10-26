@@ -50,6 +50,7 @@ class List extends Component {
           message: '搜索酒店名称或所在区'
         }
       ],
+      timeBtnType: ['order_info_kezi_list', 'order_info_dajian_list'],
       addBtnType: [
         'account_info_hotel_list',
         'account_info_inner_list',
@@ -225,7 +226,7 @@ class List extends Component {
     })
   }
   render () {
-    const { downloadBtnType, addBtnType } = this.state
+    const { downloadBtnType, addBtnType, timeBtnType } = this.state
     const {
       List: { pageInfo, resultInfo, searchInput, loading, basicInfo },
       handleCurrentChange,
@@ -1026,7 +1027,7 @@ class List extends Component {
               新增
             </Button>
           )}
-          {basicInfo.type === 'order_info_kezi_list' && (
+          {timeBtnType.indexOf(basicInfo.type) > -1 && (
             <div>
               <RangePicker
                 showTime

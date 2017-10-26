@@ -125,13 +125,16 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [changeSearchTime]: (state, action) => ({
-    ...state,
-    searchTime: {
-      begin_time: action.payload.start,
-      end_time: action.payload.end
+  [changeSearchTime]: (state, action) => {
+    const { start, end } = action.payload
+    return {
+      ...state,
+      searchTime: {
+        begin_time: start,
+        end_time: end
+      }
     }
-  }),
+  },
   [saveId]: (state, action) => ({
     ...state,
     searchId: action.payload
