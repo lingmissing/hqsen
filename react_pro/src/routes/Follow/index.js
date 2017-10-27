@@ -3,7 +3,7 @@ import Follow from './containers/FollowContainer'
 import reducer from './modules/Follow'
 
 export default store => ({
-  path: 'follow/:type',
+  path: 'follow',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
