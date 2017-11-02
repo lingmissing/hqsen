@@ -32,6 +32,7 @@ class Follow extends Component {
   componentWillUnmount () {}
 
   goDetail (id) {
+    console.log(id)
     const { follow: { type } } = this.props
     const key =
       ['hotelFollowList', 'userKeziList'].indexOf(type) > -1 ? 'order_info_kezi_list' : 'order_info_dajian_list'
