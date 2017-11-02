@@ -33,7 +33,8 @@ class Follow extends Component {
 
   goDetail (id) {
     const { follow: { type } } = this.props
-    const key = type === 'userKeziList' ? 'order_info_kezi_list' : 'order_info_dajian_list'
+    const key =
+      ['hotelFollowList', 'userKeziList'].indexOf(type) > -1 ? 'order_info_kezi_list' : 'order_info_dajian_list'
     this.props.router.push(`/detail/${key}?id=${id}`)
   }
 
