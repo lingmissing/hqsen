@@ -59,8 +59,13 @@ export const actions = {
 const ACTION_HANDLERS = {
   [saveChoose]: (state, action) => {
     let data = []
+    // 财务客资，财务搭建payments
     if (action.payload === 'finance_info_kezi_contract' || action.payload === 'payments') {
       data = [
+        {
+          label: '线下齐全',
+          value: '6'
+        },
         {
           label: '通过',
           value: '2'
@@ -75,6 +80,7 @@ const ACTION_HANDLERS = {
         }
       ]
     } else if (['middle', 'additional', 'final', 'time'].indexOf(action.payload) > -1) {
+      // 财务搭建
       data = [
         {
           label: '通过',
